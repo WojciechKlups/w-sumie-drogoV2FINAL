@@ -18,6 +18,7 @@ public class EventListener {
     @org.springframework.context.event.EventListener(ApplicationReadyEvent.class)
     public void init(){
         User user = new User();
+        user.setId(1L);
         user.setFirstName("Jan");
         user.setLastName("Kowalski");
         user.setUsername("kowalski");
