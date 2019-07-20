@@ -3,8 +3,10 @@ package pl.sda.wsumiedrogo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
+import pl.sda.wsumiedrogo.service.UserService;
 
 @Controller
 public class HomeController {
