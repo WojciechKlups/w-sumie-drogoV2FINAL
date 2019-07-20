@@ -32,15 +32,17 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String getRegister() {
-
+    public String getRegister(@RequestParam User user) {
+        user = new User();
         return "register";
     }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public User postRegister(@RequestParam User user) {
-        return userService.createNewUser(user);
+    public String postRegister(@RequestParam User user) {
+
+        userService.createNewUser(user);
+        return "success";
     }
 
     @PostMapping("/successpage")
