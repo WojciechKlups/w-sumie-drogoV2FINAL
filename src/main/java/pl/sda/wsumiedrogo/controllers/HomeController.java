@@ -31,18 +31,20 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/register")
-    public String getRegister(@RequestParam User user) {
-        user = new User();
-        return "register";
+
+    @GetMapping("/account")
+    public String getUserByEmail(@RequestParam String email, Model model){
+        UserDto userDto = userService.getUserByEmail(email);
+        model.addAttribute("user", userDto);
+        return "account";
     }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String postRegister(@RequestParam User user) {
-
+    public String postRegister(@RequestParam User user,Model model) {
         userService.createNewUser(user);
-        return "success";
+        model.addAttribute("user",user);
+        return "successpage";
     }
 
     @PostMapping("/successpage")
@@ -56,11 +58,6 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/account")
-    public String getUserByEmail(@RequestParam String email, Model model){
-        UserDto userDto = userService.getUserByEmail(email);
-        model.addAttribute("user", userDto);
-        return "account";
-    }
+
 }
 
