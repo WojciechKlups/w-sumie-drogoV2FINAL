@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -215,7 +215,7 @@
                             <span class="section-heading-upper">Register</span>
                         </h2>
                         <div class="contactForm">
-                            <form action="/successpage" method="post">
+                            <form th:action="@{/register}" th:object="${user}" method="post">
                                 <!--USERNAME-->
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" class="form-control" placeholder="Username"
