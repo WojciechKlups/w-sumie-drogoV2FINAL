@@ -17,6 +17,23 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/register")
+    public String getRegister() {
+
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String postRegister() {
+
+        return "register";
+    }
+
+    @GetMapping("/successpage")
+    public String successpage() {
+        return "successpage";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
