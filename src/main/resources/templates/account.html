@@ -230,45 +230,44 @@
 
 										<br>
 
-										<!-- /input-group th:text="-->
+										<!-- /input-group  th:text="${user.username}"-->
 									</div>
 									<div class="col-sm-6">
-										<h4 style="color:#D10024;">${user.username}</h4></span>
-										<span><p>Username</p></span>
+										<h4 style="color:#D10024;"></h4>
+										<span><p>Username : </p><p th:text="${user.username}"></p></span>
 									</div>
 									<div class="clearfix"></div>
 									<hr style="margin:5px 0 5px 0;">
 
-
-									<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6 ">user.firstName</div>
+									<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6" th:text="${user.firstName}"></div>
 									<div class="clearfix"></div>
 									<div class="bot-border"></div>
 
-									<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7">user.lastName</div>
+									<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7" th:text="${user.lastName}"></div>
 									<div class="clearfix"></div>
 									<div class="bot-border"></div>
 
-									<div class="col-sm-5 col-xs-6 tital " >Address:</div><div class="col-sm-7">user.address</div>
-
-									<div class="clearfix"></div>
-									<div class="bot-border"></div>
-
-									<div class="col-sm-5 col-xs-6 tital " >Postal Code:</div><div class="col-sm-7">user.postalCode</div>
+									<div class="col-sm-5 col-xs-6 tital " >Address:</div><div class="col-sm-7" th:text="${user.address}">user.address</div>
 
 									<div class="clearfix"></div>
 									<div class="bot-border"></div>
 
-									<div class="col-sm-5 col-xs-6 tital " >City:</div><div class="col-sm-7">user.city</div>
+									<div class="col-sm-5 col-xs-6 tital " >Postal Code:</div><div class="col-sm-7" th:text="${user.postalCode}">user.postalCode</div>
 
 									<div class="clearfix"></div>
 									<div class="bot-border"></div>
 
-									<div class="col-sm-5 col-xs-6 tital " >Phone number:</div><div class="col-sm-7">user.phoneNumber</div>
+									<div class="col-sm-5 col-xs-6 tital " >City:</div><div class="col-sm-7" th:text="${user.city}">user.city</div>
 
 									<div class="clearfix"></div>
 									<div class="bot-border"></div>
 
-									<div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7">user.email</div>
+									<div class="col-sm-5 col-xs-6 tital " >Phone number:</div><div class="col-sm-7" th:text="${user.phoneNumber}">user.phoneNumber</div>
+
+									<div class="clearfix"></div>
+									<div class="bot-border"></div>
+
+									<div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7" th:text="${user.email}">user.email</div>
 
 
 									<!-- /.box-body -->

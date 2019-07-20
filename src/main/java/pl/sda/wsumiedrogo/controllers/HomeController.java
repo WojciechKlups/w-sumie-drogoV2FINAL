@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 @Controller
 public class HomeController {
-
 
     private UserRepository userRepository;
     private UserService userService;
@@ -24,7 +25,6 @@ public class HomeController {
         this.userRepository = userRepository;
         this.userService = userService;
     }
-
 
     @GetMapping("/")
     public String home() {
@@ -56,14 +56,10 @@ public class HomeController {
         return "login";
     }
 
-    @PostMapping("/account")
-    public String account() {
-        return "account";
-    }
-
     @GetMapping("/account")
-    public String accountinfo(Model model){
-        model.addAttribute("user", userRepository.getOne(1L));
+    public String getUserByEmail(@RequestParam String email, Model model){
+        UserDto userDto = userService.getUserByEmail(email);
+        model.addAttribute("user", userDto);
         return "account";
     }
 }
