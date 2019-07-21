@@ -23,7 +23,7 @@ public class EmailService {
             email.setFrom("java13poz@gmail.com", "JAVA POZ");
             email.setSubject("W_Sumie_Drogo activation link");
             email.setMsg("Click here to activate your account on W_Sumie_Drogo:"
-                    + "\n\n http://localhost:9090/activate?code=" + user.getActivationCode());
+                    + "\n\n http://localhost:8080/activate?code=" + user.getActivationCode());
             email.addTo(user.getEmail());
             email.send();
         } catch (EmailException e) {
