@@ -1,5 +1,6 @@
 package pl.sda.wsumiedrogo.controllers;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,7 @@ public class HomeController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String postRegister(@ModelAttribute User user, Model model) {
+    public String postRegister(@ModelAttribute User user, Model model) throws EmailException {
         user.setPassword(webSecurityConfig
                 .passwordEncoder()
                 .encode(user.getPassword()));
