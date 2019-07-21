@@ -42,4 +42,10 @@ public class UserService {
         return userToSave;
     }
 
+    public User autenticate(String activationCode){
+        User byActivationCode = userRepository.findByActivationCode(activationCode);
+        byActivationCode.setActivated(true);
+        return userRepository.save(byActivationCode);
+    }
+
 }

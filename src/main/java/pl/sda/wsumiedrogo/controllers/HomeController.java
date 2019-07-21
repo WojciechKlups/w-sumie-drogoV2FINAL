@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.User;
-import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
 import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +16,10 @@ import pl.sda.wsumiedrogo.model.dto.UserDto;
 public class HomeController {
 
     private WebSecurityConfig webSecurityConfig;
-    private UserRepository userRepository;
     private UserService userService;
 
     @Autowired
-    public HomeController(UserRepository userRepository, UserService userService,WebSecurityConfig webSecurityConfig) {
-        this.userRepository = userRepository;
+    public HomeController(UserService userService,WebSecurityConfig webSecurityConfig) {
         this.userService = userService;
         this.webSecurityConfig = webSecurityConfig;
     }
@@ -37,7 +34,6 @@ public class HomeController {
     public String getUserByEmail(@RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
         model.addAttribute("user", userDto);
-        // zmiana na true bo zalogowany
         user.setLoggedIn(true);
         return "account";
     }
@@ -78,14 +74,11 @@ public class HomeController {
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
 
-        if(user.isLoggedIn() == true){
+        if(user.isLoggedIn()){
             return "checkout-logged user";
         } else {
             return "checkout-unknown user";
         }
-        //jesli zalogowany to checkout dla zalogowanego
-        //jesli nie to checkout dla niezalogowanego
-
     }
 
     @GetMapping("/store")
