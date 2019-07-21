@@ -42,6 +42,8 @@ public class User {
     private String email;
     private String password;
 
+    private String activationCode;
+    private boolean activated = false;
 
     private String role = "ROLE_USER";
 
