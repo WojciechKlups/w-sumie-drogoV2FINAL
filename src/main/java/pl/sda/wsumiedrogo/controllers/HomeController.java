@@ -14,6 +14,7 @@ import pl.sda.wsumiedrogo.model.dto.UserDto;
 @Controller
 public class HomeController {
 
+
     private UserRepository userRepository;
     private UserService userService;
 
@@ -30,9 +31,11 @@ public class HomeController {
 
 
     @GetMapping("/account")
-    public String getUserByEmail(@RequestParam String email, Model model){
+    public String getUserByEmail(@RequestParam String email, Model model, @ModelAttribute User user){
         UserDto userDto = userService.getUserByEmail(email);
         model.addAttribute("user", userDto);
+        // zmiana na true bo zalogowany
+        user.setLoggedIn(true);
         return "account";
     }
 
@@ -53,7 +56,6 @@ public class HomeController {
 
     @PostMapping("/successpage")
     public String successpage() {
-
         return "successpage";
     }
 
@@ -62,6 +64,26 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/cart")
+    public String cart() {
+        return "cart";
+    }
 
+    @GetMapping("/checkout")
+    public String checkout(@ModelAttribute User user) {
+        if(user.isLoggedIn() == true){
+            return "checkout - logged user";
+        } else {
+            return "checkout - unknown user";
+        }
+        //jesli zalogowany to checkout dla zalogowanego
+        //jesli nie to checkout dla niezalogowanego
+
+    }
+
+    @GetMapping("/store")
+    public String store() {
+        return "store";
+    }
 }
 
