@@ -33,6 +33,7 @@ public class User {
     private String address;
     private String postalCode;
     private String city;
+    private boolean isLoggedIn = false;
 
     @Column(unique = true)
     private Long phoneNumber;
