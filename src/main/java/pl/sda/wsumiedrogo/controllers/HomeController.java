@@ -76,10 +76,11 @@ public class HomeController {
 
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
-        if (user.isLoggedIn() == true) {
-            return "checkout - logged user";
+
+        if(user.isLoggedIn() == true){
+            return "checkout-logged user";
         } else {
-            return "checkout - unknown user";
+            return "checkout-unknown user";
         }
         //jesli zalogowany to checkout dla zalogowanego
         //jesli nie to checkout dla niezalogowanego
