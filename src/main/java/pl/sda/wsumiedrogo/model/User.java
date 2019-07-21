@@ -48,8 +48,6 @@ public class User {
 
     private boolean isLoggedIn = false;
 
-    @NotNull
-    @NotEmpty
     @Column(unique = true)
     private Long phoneNumber;
 

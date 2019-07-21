@@ -29,6 +29,7 @@ public class EventListener {
         user.setCity("Poznan");
         user.setRole("ROLE_ADMIN");
         user.setPhoneNumber(502676950L);
+        user.setActivated(true);
         userRepository.save(user);
     }
 }
