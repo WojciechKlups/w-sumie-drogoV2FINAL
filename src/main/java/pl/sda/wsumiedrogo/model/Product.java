@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -20,9 +18,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private double price;
     private String name;
+    private double price;
     private Category category;
-    private boolean state;
+    private boolean onStock;
     private int weight;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    private Set<Cart> carts;
 }
