@@ -27,6 +27,7 @@ public class EventListener {
         user.setAddress("ul.Januszowa 5");
         user.setPostalCode("60-123");
         user.setCity("Poznan");
+        user.setRole("ROLE_ADMIN");
         user.setPhoneNumber(502676950L);
         userRepository.save(user);
     }
