@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,22 +26,39 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotNull
+    @NotEmpty
     @Column(unique = true)
     private String username;
-
+    @NotNull
+    @NotEmpty
     private String firstName;
+    @NotNull
+    @NotEmpty
     private String lastName;
+    @NotNull
+    @NotEmpty
     private String address;
+    @NotNull
+    @NotEmpty
     private String postalCode;
+    @NotNull
+    @NotEmpty
     private String city;
+
     private boolean isLoggedIn = false;
 
+    @NotNull
+    @NotEmpty
     @Column(unique = true)
     private Long phoneNumber;
 
+    @NotNull
+    @NotEmpty
     @Column(unique = true)
     private String email;
+    @NotNull
+    @NotEmpty
     private String password;
 
     private String activationCode;
