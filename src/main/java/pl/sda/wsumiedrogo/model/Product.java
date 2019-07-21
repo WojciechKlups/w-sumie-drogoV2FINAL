@@ -23,6 +23,7 @@ public class Product {
     private Category category;
     private boolean onStock;
     private int weight;
+    private int quantity;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Set<Cart> carts;
