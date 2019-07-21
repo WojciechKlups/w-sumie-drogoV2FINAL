@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
+import pl.sda.wsumiedrogo.security.WebSecurityConfig;
 import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
@@ -14,14 +15,15 @@ import pl.sda.wsumiedrogo.model.dto.UserDto;
 @Controller
 public class HomeController {
 
-
+    private WebSecurityConfig webSecurityConfig;
     private UserRepository userRepository;
     private UserService userService;
 
     @Autowired
-    public HomeController(UserRepository userRepository, UserService userService) {
+    public HomeController(UserRepository userRepository, UserService userService,WebSecurityConfig webSecurityConfig) {
         this.userRepository = userRepository;
         this.userService = userService;
+        this.webSecurityConfig = webSecurityConfig;
     }
 
     @GetMapping("/")
@@ -31,7 +33,7 @@ public class HomeController {
 
 
     @GetMapping("/account")
-    public String getUserByEmail(@RequestParam String email, Model model, @ModelAttribute User user){
+    public String getUserByEmail(@RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
         model.addAttribute("user", userDto);
         // zmiana na true bo zalogowany
@@ -49,8 +51,11 @@ public class HomeController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public String postRegister(@ModelAttribute User user, Model model) {
+        user.setPassword(webSecurityConfig
+                .passwordEncoder()
+                .encode(user.getPassword()));
         userService.createNewUser(user);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "successpage";
     }
 
@@ -71,6 +76,7 @@ public class HomeController {
 
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
+
         if(user.isLoggedIn() == true){
             return "checkout-logged user";
         } else {

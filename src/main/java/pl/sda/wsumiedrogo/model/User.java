@@ -42,8 +42,8 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<UserRole> roles = new HashSet<>();
+
+    private String role = "ROLE_USER";
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Cart cart;
