@@ -20,7 +20,8 @@ public class EmailService {
             email.setAuthentication(username, password);
             email.setSSLOnConnect(true);
             email.setStartTLSEnabled(true);
-            email.setFrom("java13poz@gmail.com", "JAVA POZ");
+            email.setFrom("java13poz@gmail.com", "W_Sumie_Drogo" +
+                    "");
             email.setSubject("W_Sumie_Drogo activation link");
             email.setMsg("Click here to activate your account on W_Sumie_Drogo:"
                     + "\n\n http://localhost:8080/activate?code=" + user.getActivationCode());

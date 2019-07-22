@@ -34,18 +34,17 @@ public class UserService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    public User createNewUser(User user) throws EmailException {
+    public void createNewUser(User user) throws EmailException {
         String newActivationCode = RandomStringUtils.randomAlphanumeric(15);
         user.setActivationCode(newActivationCode);
         emailService.sendAuthenticationEmail(user);
-        User userToSave = userRepository.save(user);
-        return userToSave;
+        userRepository.save(user);
     }
 
-    public User autenticate(String activationCode){
+    public void authenticate(String activationCode){
         User byActivationCode = userRepository.findByActivationCode(activationCode);
         byActivationCode.setActivated(true);
-        return userRepository.save(byActivationCode);
+        userRepository.save(byActivationCode);
     }
 
 }
