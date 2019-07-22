@@ -19,7 +19,7 @@ public class AuthenticationController {
     @GetMapping("/activate")
     public String authentication(@RequestParam(name = "code") String activationCode){
         userService.authenticate(activationCode);
-        return "authentication-success";
+        return "successpages/authentication-success";
     }
 
 }
