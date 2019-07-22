@@ -9,7 +9,7 @@ import pl.sda.wsumiedrogo.service.UserService;
 @Controller
 public class AuthenticationController {
 
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     public AuthenticationController(UserService userService) {
@@ -17,11 +17,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/activate")
-    public String auhentication(@RequestParam(name = "code") String activationCode){
-        userService.autenticate(activationCode);
+    public String authentication(@RequestParam(name = "code") String activationCode){
+        userService.authenticate(activationCode);
         return "successpages/authentication-success";
     }
 
-    //serwis który dostanie jako param activation code (request param)
-    //serwis wyszukuje usera, oznacza flagę jako true i zapisuje zmienione dane
 }
