@@ -19,7 +19,7 @@ public class AuthenticationController {
     @GetMapping("/activate")
     public String auhentication(@RequestParam(name = "code") String activationCode){
         userService.autenticate(activationCode);
-        return "authentication-success";
+        return "successpages/authentication-success";
     }
 
     //serwis który dostanie jako param activation code (request param)
