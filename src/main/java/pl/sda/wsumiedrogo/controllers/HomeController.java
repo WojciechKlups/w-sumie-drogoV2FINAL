@@ -34,6 +34,10 @@ public class HomeController {
         return "header";
     }
 
+    @GetMapping("templates/footer")
+    public String footer() {
+        return "footer";
+    }
 
     @GetMapping("/account")
     public String getUserByEmail(@RequestParam String email, Model model, @ModelAttribute User user) {
