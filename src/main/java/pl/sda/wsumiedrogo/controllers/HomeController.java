@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
 import pl.sda.wsumiedrogo.service.CookieService;
@@ -71,7 +72,6 @@ public class HomeController {
     public String login() {
         return "login";
     }
-
 
     @GetMapping("/isloggedin")
     public void isloggeedin() {
