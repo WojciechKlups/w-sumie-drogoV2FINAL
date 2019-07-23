@@ -28,4 +28,8 @@ public class CartService {
         cart.getProducts().remove(product);
         return cartRepository.save(cart);
     }
+
+    public Set<Product> getAllProductsFromCart(Cart cart){
+        return cart.getProducts();
+    }
 }
