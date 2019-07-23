@@ -24,7 +24,7 @@ public class UserDto {
     private String address;
     private String postalCode;
     private String city;
-
     private Long phoneNumber;
     private String email;
+    private boolean activated;
 }
