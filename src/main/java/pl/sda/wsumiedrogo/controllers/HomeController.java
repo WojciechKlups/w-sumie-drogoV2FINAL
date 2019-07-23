@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
 import pl.sda.wsumiedrogo.service.CookieService;
@@ -39,13 +40,13 @@ public class HomeController {
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
-        model.addAttribute("user", userDto);
-        user.setLoggedIn(true);
-
-        cookieService.createCookie(response, user);
-
-
-        return "account";
+         if (userDto.isActivated()) {
+            user.setLoggedIn(true);
+           cookieService.createCookie(response, user);
+            return "account";
+        } else {
+            return "failedlogin";
+        }
     }
 
     @GetMapping("/register")
@@ -63,7 +64,7 @@ public class HomeController {
                 .encode(user.getPassword()));
         userService.createNewUser(user);
         model.addAttribute("user", user);
-        return "successpage";
+        return "successpages/successpage";
     }
 
 
@@ -73,7 +74,10 @@ public class HomeController {
     }
 
     @GetMapping("/cart")
-    public String cart() {
+    //TO BĘDZIE RACZEJ DO WYWALENIA
+        public String getCart(@ModelAttribute Cart cart, Model model){
+        cart.getProducts().forEach(product -> toString());
+        model.addAttribute("cart", cart);
         return "cart";
     }
 

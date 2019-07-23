@@ -61,7 +61,7 @@ public class User {
     private String password;
 
     private String activationCode;
-    private boolean activated = false;
+    private boolean activated;
 
     private String role = "ROLE_USER";
 
