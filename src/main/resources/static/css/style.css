@@ -448,6 +448,11 @@ textarea.input {
   padding-bottom: 0px;
   background-color: #15161D;
 }
+#main-header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #15161D;
+}
 
 .header-logo {
   float: left;
@@ -2022,7 +2027,7 @@ textarea.input {
 }
 
 .footer-links li+li {
-  margin-top: 15px;
+  margin-top: 3px;
 }
 
 .footer-links li a {
