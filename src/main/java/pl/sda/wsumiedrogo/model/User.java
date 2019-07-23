@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -45,6 +43,9 @@ public class User {
     @NotNull
     @NotEmpty
     private String city;
+
+
+    private String image = "../img/user.png";
 
     private boolean isLoggedIn = false;
 

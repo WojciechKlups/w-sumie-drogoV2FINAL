@@ -6,37 +6,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
+import pl.sda.wsumiedrogo.service.CookieService;
 import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
 
     private WebSecurityConfig webSecurityConfig;
     private UserService userService;
+    private CookieService cookieService;
+
     @Autowired
-    public HomeController(UserService userService,WebSecurityConfig webSecurityConfig) {
+    public HomeController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig) {
         this.userService = userService;
+        this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(@CookieValue(value = "username", defaultValue = "default") String username) {
+
         return "index";
     }
 
     @GetMapping("/account")
-    public String getUserByEmail(@RequestParam String email, Model model, User user) {
+    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
-        model.addAttribute("user", userDto);
-        if (userDto.isActivated()) {
+         if (userDto.isActivated()) {
             user.setLoggedIn(true);
+           cookieService.createCookie(response, user);
             return "account";
         } else {
-            return "index";
+            return "failedlogin";
         }
     }
 
@@ -59,17 +68,22 @@ public class HomeController {
     }
 
 
-
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/isloggedin")
+    public void isloggeedin() {
+//        return login;
+//        return "myaccount";
     }
 
 
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
 
-        if(user.isLoggedIn()){
+        if (user.isLoggedIn()) {
             return "checkout-logged user";
         } else {
             return "checkout-unknown user";
