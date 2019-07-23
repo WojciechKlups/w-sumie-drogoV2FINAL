@@ -44,9 +44,8 @@ public class User {
     @NotEmpty
     private String city;
 
-    @NotNull
-    @NotEmpty
-    private String image = "static/img/user.png";
+
+    private String image = "../img/user.png";
 
     private boolean isLoggedIn = false;
 
