@@ -9,19 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
+import pl.sda.wsumiedrogo.service.CookieService;
 import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
-public class HomeController {
+public class MainController {
 
     private WebSecurityConfig webSecurityConfig;
     private UserService userService;
+    private CookieService cookieService;
 
     @Autowired
-    public HomeController(UserService userService,WebSecurityConfig webSecurityConfig) {
+    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig) {
         this.userService = userService;
+        this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
     }
 
@@ -29,6 +36,28 @@ public class HomeController {
     public String home() {
         return "index";
     }
+
+
+    @GetMapping("/isloggedin")
+    public String isloggeedin(@CookieValue(value = "username", defaultValue = "default") String username,@ModelAttribute User user) {
+
+        if(username.equals("default")){
+            return "login";
+        }
+
+        return "account";
+    }
+
+//    @GetMapping("/logout")
+//    public String logout( HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//
+//        for (int i = 0; i <cookies.length ; i++) {
+//            cookies[i].setMaxAge(0);
+//        }
+//
+//        return "successpages/successlogout";
+//    }
 
     @GetMapping("/account")
     public String getUserByEmail(@RequestParam String email, Model model, User user) {
@@ -38,9 +67,10 @@ public class HomeController {
             user.setLoggedIn(true);
             return "account";
         } else {
-            return "index";
+            return "failedlogin";
         }
     }
+
 
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,19 +91,13 @@ public class HomeController {
     }
 
 
-
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/cart")
-    //TO BĘDZIE RACZEJ DO WYWALENIA
-        public String getCart(@ModelAttribute Cart cart, Model model){
-        cart.getProducts().forEach(product -> toString());
-        model.addAttribute("cart", cart);
-        return "cart";
-    }
+
+
 
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
