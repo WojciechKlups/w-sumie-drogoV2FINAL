@@ -33,20 +33,24 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(@CookieValue(value = "username", defaultValue = "default") String username) {
+
         return "index";
     }
 
 
     @GetMapping("/isloggedin")
-    public String isloggeedin(@CookieValue(value = "username", defaultValue = "default") String username,@ModelAttribute User user) {
+    public String isloggeedin(HttpServletRequest request,@CookieValue(value = "username", defaultValue = "default") String username, @ModelAttribute User user) {
 
-        if(username.equals("default")){
+        if (username.equals("default")) {
             return "login";
+        } else {
+            cookieService.getUserFromCookie(request, username);
+            return "account";
         }
-
-        return "account";
     }
+
+
 
 //    @GetMapping("/logout")
 //    public String logout( HttpServletRequest request) {
@@ -60,11 +64,13 @@ public class MainController {
 //    }
 
     @GetMapping("/account")
-    public String getUserByEmail(@RequestParam String email, Model model, User user) {
+    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
         model.addAttribute("user", userDto);
         if (userDto.isActivated()) {
-            user.setLoggedIn(true);
+
+            cookieService.createCookie(response, userDto);
+
             return "account";
         } else {
             return "failedlogin";
@@ -95,8 +101,6 @@ public class MainController {
     public String login() {
         return "login";
     }
-
-
 
 
     @GetMapping("/checkout")
