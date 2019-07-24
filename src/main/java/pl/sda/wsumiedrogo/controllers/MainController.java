@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class HomeController {
+public class MainController {
 
     private WebSecurityConfig webSecurityConfig;
     private UserService userService;
     private CookieService cookieService;
 
     @Autowired
-    public HomeController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig) {
+    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig) {
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
@@ -37,17 +38,43 @@ public class HomeController {
         return "index";
     }
 
+
+    @GetMapping("/isloggedin")
+    public String isloggeedin(@CookieValue(value = "username", defaultValue = "default") String username,@ModelAttribute User user) {
+
+        if(username.equals("default")){
+            return "login";
+        }
+
+        return "account";
+    }
+
+//    @GetMapping("/logout")
+//    public String logout( HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//
+//        for (int i = 0; i <cookies.length ; i++) {
+//            cookies[i].setMaxAge(0);
+//        }
+//
+//        return "successpages/successlogout";
+//    }
+
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        UserDto userDto = userService.getUserByEmail(email);
-         if (userDto.isActivated()) {
-            user.setLoggedIn(true);
-           cookieService.createCookie(response, user);
+        User userByEmail = userService.getUserByEmail(email);
+         if (userByEmail.isActivated() &&
+            userByEmail.getPassword().equals(user.getPassword()) &&
+            userByEmail.getEmail().equals(user.getEmail())) {
+
+            //userByEmail.setLoggedIn(true);
+           cookieService.createCookie(response, userByEmail);
             return "account";
         } else {
             return "failedlogin";
         }
     }
+
 
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -73,11 +100,7 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/isloggedin")
-    public void isloggeedin() {
-//        return login;
-//        return "myaccount";
-    }
+
 
 
     @GetMapping("/checkout")
