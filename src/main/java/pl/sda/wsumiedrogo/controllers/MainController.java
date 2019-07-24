@@ -40,11 +40,12 @@ public class MainController {
 
 
     @GetMapping("/isloggedin")
-    public String isloggeedin(HttpServletRequest request,@CookieValue(value = "username", defaultValue = "default") String username, @ModelAttribute User user) {
+    public String isloggeedin(HttpServletRequest request,@CookieValue(value = "username", defaultValue = "default") String username, @ModelAttribute User user,Model model) {
 
         if (username.equals("default")) {
             return "login";
         } else {
+
             cookieService.getUserFromCookie(request, username);
             return "account";
         }
