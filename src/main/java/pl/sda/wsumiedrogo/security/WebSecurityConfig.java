@@ -5,17 +5,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements LogoutSuccessHandler {
 
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,8 +42,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/checkout").permitAll()
                 .antMatchers("/successpage").permitAll()
-                .antMatchers("account").hasRole("USER")
+                .antMatchers("/account").hasRole("USER")
+                .antMatchers("/successpages/successlogout").hasAnyRole("USER","ADMIN")
+                .antMatchers("/authentication-success").permitAll()
+                .antMatchers("/maczek").permitAll()
+                .antMatchers("/sluchawki").permitAll()
+                .antMatchers("/cart").permitAll()
+                .antMatchers("/checkout-loggeduser").hasRole("USER")
+                .antMatchers("/checkout-unknownuser").hasRole("USER")
+                .antMatchers("/failedlogin").permitAll()
+                .antMatchers("/footer").permitAll()
+                .antMatchers("/header").permitAll()
+                .antMatchers("/store").permitAll()
                 .and()
                 .csrf().disable();
+    }
+
+    //cart tylko dla userow ale to nie dziala wiec ebac
+
+    @Override
+    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+
     }
 }
