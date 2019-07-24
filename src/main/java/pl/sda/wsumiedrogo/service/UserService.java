@@ -28,13 +28,10 @@ public class UserService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    public User getUserByEmail(String email) {
-        return userRepository
-                .findByEmail(email)
+    public UserDto getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(user -> userMapper.userToUserDto(user))
                 .orElseThrow(ResourceNotFoundException::new);
-//        return userRepository.findByEmail(email)
-//                .map(user -> userMapper.userToUserDto(user))
-//                .orElseThrow(ResourceNotFoundException::new);
     }
 
     public void createNewUser(User user) throws EmailException {
