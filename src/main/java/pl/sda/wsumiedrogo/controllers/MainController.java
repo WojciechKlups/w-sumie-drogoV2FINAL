@@ -52,16 +52,17 @@ public class MainController {
 
 
 
-//    @GetMapping("/logout")
-//    public String logout( HttpServletRequest request) {
-//        Cookie[] cookies = request.getCookies();
-//
-//        for (int i = 0; i <cookies.length ; i++) {
-//            cookies[i].setMaxAge(0);
-//        }
-//
-//        return "successpages/successlogout";
-//    }
+    @GetMapping("/logouts")
+    public String logout( HttpServletRequest request,HttpServletResponse response,@CookieValue(value = "username", defaultValue = "default") String username) {
+        Cookie[] cookies = request.getCookies();
+
+        for (int i = 0; i <cookies.length ; i++) {
+             cookieService.deleteCookie(cookies[i],response);
+        }
+
+
+        return "successpages/successlogout";
+    }
 
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {

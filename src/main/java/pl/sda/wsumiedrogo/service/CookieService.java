@@ -29,8 +29,9 @@ public class CookieService {
         return cookieUser;
     }
 
-    public void deleteCookie(Cookie cookie){
+    public void deleteCookie(Cookie cookie,HttpServletResponse response ){
         cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 
     public Cookie[] getCookie(HttpServletRequest request){
