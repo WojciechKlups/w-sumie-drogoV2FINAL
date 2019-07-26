@@ -3,6 +3,7 @@ package pl.sda.wsumiedrogo.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //https://www.baeldung.com/spring-security-logout
@@ -31,6 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+//.usernameParameter(&quot;username&quot;) // default is username
+//	 * 				.passwordParameter(&quot;password&quot;) // default is password
+//	 * 				.loginPage(&quot;/authentication/login&quot;) // default is /login with an HTTP get
+//	 * 				.failureUrl(&quot;/authentication/login?failed&quot;) // default is /login?error
+//	 * 				.loginProcessingUrl(&quot;/authentication/login/process&quot;)
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
@@ -45,12 +52,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/successpage").permitAll()
                 .antMatchers("/account").permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/successlogout")
-                .deleteCookies()
-                .invalidateHttpSession(false)
-                .and()
                 .formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginPage("/login")
+                .failureUrl("/failedlogin")
+                .loginProcessingUrl("/account")
+                .and()
+                .logout()
+                .logoutUrl("/custom-logout")
+                .deleteCookies("username")
+                .invalidateHttpSession(false)
+                .logoutSuccessUrl("/successlogout")
                 .and()
                 .csrf().disable();
     }

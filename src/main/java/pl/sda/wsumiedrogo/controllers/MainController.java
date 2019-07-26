@@ -52,19 +52,6 @@ public class MainController {
     }
 
 
-
-    @GetMapping("/logouts")
-    public String logout( HttpServletRequest request,HttpServletResponse response,@CookieValue(value = "username", defaultValue = "default") String username) {
-        Cookie[] cookies = request.getCookies();
-
-        for (int i = 0; i <cookies.length ; i++) {
-             cookieService.deleteCookie(cookies[i],response);
-        }
-
-
-        return "successpages/successlogout";
-    }
-
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
         UserDto userDto = userService.getUserByEmail(email);
