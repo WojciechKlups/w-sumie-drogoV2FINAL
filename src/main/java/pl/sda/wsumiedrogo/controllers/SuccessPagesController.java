@@ -9,4 +9,8 @@ public class SuccessPagesController {
     public String successpage() {
         return "successpages/successpage";
     }
+    @PostMapping("/successlogout")
+    public String successlogout() {
+        return "successpages/successlogout";
+    }
 }

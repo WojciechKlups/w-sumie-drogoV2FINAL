@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements LogoutSuccessHandler {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //https://www.baeldung.com/spring-security-logout
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,13 +45,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements L
                 .antMatchers("/successpage").permitAll()
                 .antMatchers("/account").permitAll()
                 .and()
+                .logout()
+                .logoutSuccessUrl("/successlogout")
+                .deleteCookies()
+                .invalidateHttpSession(false)
+                .and()
+                .formLogin()
+                .and()
                 .csrf().disable();
     }
 
     //cart tylko dla userow ale to nie dziala wiec ebac
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
-    }
 }
