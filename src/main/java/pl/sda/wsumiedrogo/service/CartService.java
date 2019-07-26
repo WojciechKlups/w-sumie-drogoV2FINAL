@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.repositories.CartRepository;
+import pl.sda.wsumiedrogo.repositories.ProductsRepository;
 
 import java.util.Set;
 
@@ -12,21 +13,39 @@ import java.util.Set;
 public class CartService {
 
     private CartRepository cartRepository;
-    private Cart cart = new Cart();
+    private ProductsRepository productsRepository;
+ //   private Cart cart = new Cart();
 
     @Autowired
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, ProductsRepository productsRepository) {
         this.cartRepository = cartRepository;
+        this.productsRepository = productsRepository;
     }
 
-    public Cart addProduct(Product product){
-        cart.getProducts().add(product);
+    public Cart createNewCart(){
+        Cart cart = new Cart();
         return cartRepository.save(cart);
+    }
+
+    public void addProduct(String productName) {
+        Product byName = productsRepository.findByName(productName);
+        boolean b = cartRepository.existsById(1L);
+        if (b = false) {
+            Cart newCart = createNewCart();
+            cartRepository.save(newCart);
+            newCart.getProducts().add(byName);
+            cartRepository.save(newCart);
+        } else {
+            Cart existingCart = cartRepository.getOne(1L);
+            existingCart.getProducts().add(byName);
+            cartRepository.save(existingCart);
+        }
     }
 
     public Cart removeProduct(Product product){
-        cart.getProducts().remove(product);
-        return cartRepository.save(cart);
+        Cart existingCart = cartRepository.getOne(1L);
+        existingCart.getProducts().remove(product);
+        return cartRepository.save(existingCart);
     }
 
     public Set<Product> getAllProductsFromCart(Cart cart){

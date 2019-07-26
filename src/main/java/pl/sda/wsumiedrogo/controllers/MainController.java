@@ -95,7 +95,7 @@ public class MainController {
     @GetMapping("/checkout")
     public String checkout(@ModelAttribute User user) {
 
-        if (user.isLoggedIn()) {
+        if(user.isLoggedIn()){
             return "checkout-logged user";
         } else {
             return "checkout-unknown user";
