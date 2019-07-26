@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,6 +70,37 @@
     <div class="container">
         <!-- row -->
         <div class="row">
+            <table>
+            <tr>
+                <th>Option</th>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            <div th:with="total" th:value="0"></div>
+            <div th:block th:each="products : ${sessionScope.cart}">
+                <div th:with="total" th:value="${total + product.price * product.quantity}"></div>
+                <tr>
+                    <td align="center">
+                        <a href="${pageContext.request.contextPath}/cart/remove/${product.id}"
+                           onclick="return confirm('Are you sure?')">Remove</a> </td>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.photo}</td>
+                    <td>${product.price}</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.price * product.quantity}</td>
+                </tr>
+            </div>
+            <tr>
+                <td clospan="6" align="right">Sum</td>
+                <td>${total}</td>
+            </tr>
+            </table>
+            <br><a href="/store">Continue shopping</a>
         </div>
         <!-- /row -->
     </div>

@@ -5,18 +5,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.service.CartService;
+import pl.sda.wsumiedrogo.service.ProductsService;
 
 @Controller
 public class CartController {
 
     private CartService cartService;
+    private ProductsService productsService;
 
     @Autowired
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, ProductsService productsService) {
         this.cartService = cartService;
+        this.productsService = productsService;
     }
 
     //NOT SURE IF IT SHOULD WORK LIKE THAT...
@@ -29,8 +34,8 @@ public class CartController {
     }
 
     @GetMapping("/cart/add")
-    public String addProductToCart(@ModelAttribute Product product, Cart cart, Model model){
-        cartService.addProduct(product);
+    public String addProductToCart(@ModelAttribute Cart cart, Model model,@RequestParam String name){
+        cartService.addProduct(name);
         model.addAttribute("cart", cart);
         return "cart";
     }
