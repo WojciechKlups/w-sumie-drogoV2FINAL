@@ -14,4 +14,8 @@ public class SuccessPagesController {
     public String successlogout() {
         return "successpages/successlogout";
     }
+    @GetMapping("/successcheckout")
+    public String successcheckout() {
+        return "successpages/successcheckout";
+    }
 }
