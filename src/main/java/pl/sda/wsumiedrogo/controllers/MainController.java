@@ -67,11 +67,9 @@ public class MainController {
     }
 
     @GetMapping("/store")
-    @ResponseStatus(HttpStatus.CREATED)
     public String getStore() {
         return "store";
     }
-
 
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -102,15 +100,10 @@ public class MainController {
     public String checkout(@ModelAttribute User user) {
 
         if(user.isLoggedIn()){
-            return "checkout-logged user";
+            return "checkout-loggeduser";
         } else {
-            return "checkout-unknown user";
+            return "checkout-unknownuser";
         }
-    }
-
-    @GetMapping("/store")
-    public String store() {
-        return "store";
     }
 }
 

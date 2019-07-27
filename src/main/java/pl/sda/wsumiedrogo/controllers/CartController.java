@@ -34,8 +34,10 @@ public class CartController {
     }
 
     @GetMapping("/cart/add")
-    public String addProductToCart(@ModelAttribute Cart cart, Model model,@RequestParam String name){
-        cartService.addProduct(name);
+    public String addProductToCart(@ModelAttribute Product product, Cart cart, Model model){
+        Product maczek = productsService.getProductByName("maczek");
+        model.addAttribute("maczek", maczek);
+        cartService.addProduct(maczek.getName());
         model.addAttribute("cart", cart);
         return "cart";
     }
