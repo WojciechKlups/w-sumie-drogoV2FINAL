@@ -20,24 +20,13 @@ import java.io.IOException;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //https://www.baeldung.com/spring-security-logout
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 
-
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-//.usernameParameter(&quot;username&quot;) // default is username
-//	 * 				.passwordParameter(&quot;password&quot;) // default is password
-//	 * 				.loginPage(&quot;/authentication/login&quot;) // default is /login with an HTTP get
-//	 * 				.failureUrl(&quot;/authentication/login?failed&quot;) // default is /login?error
-//	 * 				.loginProcessingUrl(&quot;/authentication/login/process&quot;)
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
