@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -64,7 +65,7 @@ public class User{
     private String activationCode;
     private boolean activated;
 
-    private String role = "ROLE_USER";
+    private Roles role = Roles.ROLE_USER;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Cart cart;

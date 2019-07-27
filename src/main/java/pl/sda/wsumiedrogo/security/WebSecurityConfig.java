@@ -20,15 +20,10 @@ import java.io.IOException;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //https://www.baeldung.com/spring-security-logout
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
-
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
