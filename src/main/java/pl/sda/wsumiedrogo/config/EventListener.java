@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.parameters.P;
-import pl.sda.wsumiedrogo.model.Cart;
-import pl.sda.wsumiedrogo.model.Category;
-import pl.sda.wsumiedrogo.model.Product;
-import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.model.*;
 import pl.sda.wsumiedrogo.repositories.ProductsRepository;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 @Configuration
@@ -47,7 +44,7 @@ public class EventListener {
         user.setAddress("ul.Januszowa 5");
         user.setPostalCode("60-123");
         user.setCity("Poznan");
-        user.setRole("ROLE_ADMIN");
+        user.setRole(Roles.ROLE_ADMIN);
         user.setPhoneNumber(502676950L);
         user.setActivated(true);
         //user.setCart(cart);
