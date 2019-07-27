@@ -34,7 +34,6 @@ public class EventListener {
 
         User user = new User();
         Cart cart = new Cart();
-        cart.setId(1L);
 
         user.setId(1L);
         user.setFirstName("Jan");
@@ -48,7 +47,7 @@ public class EventListener {
         user.setRole(Roles.ROLE_ADMIN);
         user.setPhoneNumber(502676950L);
         user.setActivated(true);
-       // user.setCart(cart);
+        user.setCart(cart);
         userRepository.save(user);
     }
 }

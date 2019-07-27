@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.Product;
+import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.service.CartService;
 import pl.sda.wsumiedrogo.service.ProductsService;
 
@@ -34,10 +35,12 @@ public class CartController {
     }
 
     @GetMapping("/cart/add")
-    public String addProductToCart(@ModelAttribute Product product, Cart cart, Model model){
+    public String addProductToCart(@ModelAttribute User user, Model model){
         Product maczek = productsService.getProductByName("maczek");
+        Cart cart = user.getCart();
         model.addAttribute("maczek", maczek);
         cartService.addProduct(maczek.getName());
+
         model.addAttribute("cart", cart);
         return "cart";
     }
