@@ -61,7 +61,9 @@ public class MainController {
 
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
+        //W pierwszej wersji podajemy UserDto i z niego odczytujemy wszystkie dane
         //UserDto userDto = userService.getUserByEmail(email);
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         model.addAttribute("user", user);
         if (userDetails.isEnabled()) {
