@@ -67,7 +67,7 @@ public class User{
 
     private Roles role = Roles.ROLE_USER;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Cart cart;
 
 }

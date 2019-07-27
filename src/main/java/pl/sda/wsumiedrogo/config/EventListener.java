@@ -47,7 +47,7 @@ public class EventListener {
         user.setRole(Roles.ROLE_ADMIN);
         user.setPhoneNumber(502676950L);
         user.setActivated(true);
-        //user.setCart(cart);
+        user.setCart(cart);
         userRepository.save(user);
     }
 }

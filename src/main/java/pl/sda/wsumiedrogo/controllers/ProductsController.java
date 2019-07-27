@@ -17,7 +17,6 @@ public class ProductsController {
 
     @GetMapping("/maczek")
     public String getMaczek( Model model) {
-        model.addAttribute("maczek", productsService.getProductByName("maczek"));
         return "products/maczek";
     }
     @GetMapping("/sluchawki")
