@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+/*                .sessionFixation().migrateSession()*/
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()

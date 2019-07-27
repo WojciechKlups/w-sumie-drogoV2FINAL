@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.Roles;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
+import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,12 +27,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
+
 
         org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
