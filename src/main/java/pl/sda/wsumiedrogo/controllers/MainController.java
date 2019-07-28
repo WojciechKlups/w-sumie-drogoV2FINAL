@@ -13,9 +13,7 @@ import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.UserDetailsServiceImpl;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
-import pl.sda.wsumiedrogo.service.AccountService;
-import pl.sda.wsumiedrogo.service.CookieService;
-import pl.sda.wsumiedrogo.service.UserService;
+import pl.sda.wsumiedrogo.service.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
 
@@ -39,12 +37,8 @@ public class MainController {
     @Autowired
     public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
                           UserDetailsServiceImpl userDetailsService, LoginService loginService,
-                          CheckoutService checkoutService,RegistrationService registrationService) {
-   
+                          CheckoutService checkoutService,RegistrationService registrationService, AccountService accountService) {
 
-    @Autowired
-    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
-                          UserDetailsServiceImpl userDetailsService, AccountService accountService) {
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
