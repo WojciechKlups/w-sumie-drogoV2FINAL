@@ -28,6 +28,6 @@ public class EmailController {
         context.setVariable("description", "You have to pay price below");
         String body = templateEngine.process("order-confirmation", context);
         emailSender.sendEmail("wojciech.klups@gmail.com", "W_Sumie_Drogo Order confirmation", body);
-        return "index";
+        return "successcheckout";
     }
 }

@@ -11,6 +11,7 @@ import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.UserDetailsServiceImpl;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
+import pl.sda.wsumiedrogo.service.AccountService;
 import pl.sda.wsumiedrogo.service.CookieService;
 import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,16 @@ public class MainController {
     private UserService userService;
     private CookieService cookieService;
     private UserDetailsServiceImpl userDetailsService;
+    private AccountService accountService;
 
     @Autowired
     public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
-                          UserDetailsServiceImpl userDetailsService) {
+                          UserDetailsServiceImpl userDetailsService, AccountService accountService) {
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
         this.userDetailsService = userDetailsService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/")
@@ -45,15 +48,17 @@ public class MainController {
 
 
     @GetMapping("/isloggedin")
-    public String isloggeedin(HttpServletRequest request,@CookieValue(value = "username", defaultValue = "default") String username, @ModelAttribute User user,Model model) {
+    public String isloggeedin(HttpServletRequest request,@CookieValue(value = "username", defaultValue = "default")
+            String username, @ModelAttribute User user,Model model) {
 
         if (username.equals("default")) {
             return "login";
+
         } else {
 
-//            UserDto userDto = userService.getUserByEmail(username);
-//            model.addAttribute("user", userDto);
-//            cookieService.getUserFromCookie(request, username);
+            UserDto userDto = userService.getUserByEmail(username);
+            model.addAttribute("user", userDto);
+            cookieService.getUserFromCookie(request, username);
              return "account";
         }
     }
@@ -61,19 +66,7 @@ public class MainController {
 
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        //W pierwszej wersji podajemy UserDto i z niego odczytujemy wszystkie dane
-        //UserDto userDto = userService.getUserByEmail(email);
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        model.addAttribute("user", user);
-        if (userDetails.isEnabled()) {
-
-            cookieService.createCookie(response, user);
-
-            return "account";
-        } else {
-            return "failedlogin";
-        }
+         return accountService.getAccount(userService, model, email, cookieService, user, response);
     }
 
     @GetMapping("/store")
