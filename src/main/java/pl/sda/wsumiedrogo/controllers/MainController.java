@@ -14,11 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MainController {
 
-
     private UserService userService;
     private CookieService cookieService;
     private LoginService loginService;
-
 
     @Autowired
     public MainController(CookieService cookieService, UserService userService, LoginService loginService) {
@@ -46,7 +44,5 @@ public class MainController {
 //        model.addAttribute("user",name);
 
     }
-
-
 }
 
