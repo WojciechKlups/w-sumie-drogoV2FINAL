@@ -32,11 +32,12 @@ public class MainController {
     private LoginService loginService;
     private CheckoutService checkoutService;
     private RegistrationService registrationService;
+  private AccountService accountService;
 
     @Autowired
     public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
                           UserDetailsServiceImpl userDetailsService, LoginService loginService,
-                          CheckoutService checkoutService,RegistrationService registrationService) {
+                          CheckoutService checkoutService,RegistrationService registrationService, AccountService accountService) {
 
         this.userService = userService;
         this.cookieService = cookieService;
@@ -45,6 +46,7 @@ public class MainController {
         this.loginService = loginService;
         this.checkoutService = checkoutService;
         this.registrationService = registrationService;
+        this.accountService = accountService;
     }
 
 
@@ -70,21 +72,8 @@ public class MainController {
 
 
     @GetMapping("/account")
-    public String getUserByEmail(Principal principal, HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        //W pierwszej wersji podajemy UserDto i z niego odczytujemy wszystkie dane
-        UserDto userDto = userService.getUserByEmail(email);
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-        model.addAttribute("user", userDto);
-        if (userDto.isActivated()) {
-
-            cookieService.createCookie(response, user);
-
-            return "account";
-        } else {
-            return "failedlogin";
-        }
+    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
+         return accountService.getAccount(userService, model, email, cookieService, user, response);
     }
 
     @GetMapping("/store")
