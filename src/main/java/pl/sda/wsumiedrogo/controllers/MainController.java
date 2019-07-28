@@ -3,11 +3,13 @@ package pl.sda.wsumiedrogo.controllers;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.security.UserDetailsServiceImpl;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
 import pl.sda.wsumiedrogo.service.CookieService;
 import pl.sda.wsumiedrogo.service.UserService;
@@ -24,12 +26,15 @@ public class MainController {
     private WebSecurityConfig webSecurityConfig;
     private UserService userService;
     private CookieService cookieService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig) {
+    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
+                          UserDetailsServiceImpl userDetailsService) {
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/")
@@ -46,19 +51,24 @@ public class MainController {
             return "login";
         } else {
 
-            cookieService.getUserFromCookie(request, username);
-            return "account";
+//            UserDto userDto = userService.getUserByEmail(username);
+//            model.addAttribute("user", userDto);
+//            cookieService.getUserFromCookie(request, username);
+             return "account";
         }
     }
 
 
     @GetMapping("/account")
     public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        UserDto userDto = userService.getUserByEmail(email);
-        model.addAttribute("user", userDto);
-        if (userDto.isActivated()) {
+        //W pierwszej wersji podajemy UserDto i z niego odczytujemy wszystkie dane
+        //UserDto userDto = userService.getUserByEmail(email);
 
-            cookieService.createCookie(response, userDto);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        model.addAttribute("user", user);
+        if (userDetails.isEnabled()) {
+
+            cookieService.createCookie(response, user);
 
             return "account";
         } else {

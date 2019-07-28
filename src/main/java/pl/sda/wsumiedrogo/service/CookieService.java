@@ -1,5 +1,6 @@
 package pl.sda.wsumiedrogo.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CookieValue;
 import pl.sda.wsumiedrogo.model.User;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class CookieService {
-    public void createCookie(HttpServletResponse response, UserDto userDto){
-        Cookie cookie = new Cookie("username", userDto.getEmail());
+    public void createCookie(HttpServletResponse response, User  user){
+        Cookie cookie = new Cookie("username", user.getEmail());
         cookie.setMaxAge(7 * 24 * 60 * 60);
         response.addCookie(cookie);
     }
