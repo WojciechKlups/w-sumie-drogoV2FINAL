@@ -14,10 +14,10 @@ public class UserService {
 
     private UserRepository userRepository;
     private UserMapper userMapper;
-    private EmailService emailService;
+    private RegistrationEmailService emailService;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserMapper userMapper, EmailService emailService) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, RegistrationEmailService emailService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.emailService = emailService;

@@ -9,13 +9,15 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class EmailSenderImpl implements EmailSender {
+public class CheckoutEmailServiceImpl implements CheckoutEmailService {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    JavaMailSender javaMailSender;
+
 
     @Override
     public void sendEmail(String to, String subject, String content) {
+
         MimeMessage mail = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mail,true);

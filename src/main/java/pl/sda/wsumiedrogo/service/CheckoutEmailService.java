@@ -1,5 +1,6 @@
 package pl.sda.wsumiedrogo.service;
 
-public interface EmailSender {
+
+public interface CheckoutEmailService {
     void sendEmail(String to, String subject, String content);
 }
