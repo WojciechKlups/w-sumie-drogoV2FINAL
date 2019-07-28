@@ -30,7 +30,7 @@ public class CartService {
     public void addProduct(String productName) {
         Product byName = productsRepository.findByName(productName);
         boolean isAnyCartExisting = cartRepository.existsById(1L);
-        if (isAnyCartExisting == false) {
+        if (!isAnyCartExisting) {
             Cart newCart = createNewCart();
             newCart.getProducts().add(byName);
             cartRepository.save(newCart);

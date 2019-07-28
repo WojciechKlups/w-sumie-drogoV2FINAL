@@ -77,11 +77,9 @@ public class MainController {
     }
 
     @GetMapping("/store")
-    @ResponseStatus(HttpStatus.CREATED)
     public String getStore() {
         return "store";
     }
-
 
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -117,6 +115,5 @@ public class MainController {
             return "checkout-unknownuser";
         }
     }
-
 }
 

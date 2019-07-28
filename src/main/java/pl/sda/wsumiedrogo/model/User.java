@@ -69,7 +69,7 @@ public class User implements UserDetails{
 
     private Roles role = Roles.ROLE_USER;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Cart cart;
 
     @Override

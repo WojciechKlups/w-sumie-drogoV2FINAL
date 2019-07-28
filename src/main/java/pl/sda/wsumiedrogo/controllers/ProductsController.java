@@ -19,6 +19,7 @@ public class ProductsController {
     public String getMaczek( Model model) {
         return "products/maczek";
     }
+
     @GetMapping("/sluchawki")
     public String getSluchawki() {
         return "products/sluchawki";

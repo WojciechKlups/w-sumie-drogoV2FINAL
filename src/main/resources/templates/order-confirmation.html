@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">W_Sumie_Drogo order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        h1 {font-size: 26px; color: #444444 !important; font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", sans-serif; line-height: 1.5;}
+        h3 {font-size: 12px; color: #444444 !important; font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", sans-serif;}
+        p {font-size: 16px; color: #ffffff; font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", sans-serif; line-height: 1.5;}
+        table { border: 1px solid #e4e4e4;}
+        a {color: #062b67; text-decoration: none; font-weight: bold;}
+    </style>
+</head>
+<body>
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="0095cc">
+    <tr>
+        <td height="50" align="center"><p th:text="${header}">header</p></td>
+    </tr>
+    <tr bgcolor="ffffff">
+        <td height="100" align="center"><h1 th:text="${title}">title</h1></td>
+    </tr>
+    <tr bgcolor="ffffff">
+        <td height="100" align="center"><h3 th:text="${description}">description</h3></td>
+    </tr>
+    <tr>
+        <div class="col-md-5 order-details">
+            <div class="section-title text-center">
+                <h3 class="title">Your Order</h3>
+            </div>
+            <div class="order-summary">
+                <div class="order-col">
+                    <div><strong>PRODUCT</strong></div>
+                    <div><strong>TOTAL</strong></div>
+                </div>
+                <div class="order-products">
+                    <div class="order-col">
+                        <div>1x Product Name Goes Here</div>
+                        <div>$980.00</div>
+                    </div>
+                    <div class="order-col">
+                        <div>2x Product Name Goes Here</div>
+                        <div>$980.00</div>
+                    </div>
+                </div>
+                <div class="order-col">
+                    <div>Shiping</div>
+                    <div><strong>FREE</strong></div>
+                </div>
+                <div class="order-col">
+                    <div><strong>TOTAL</strong></div>
+                    <div><strong class="order-total">$2940.00</strong></div>
+                </div>
+            </div>
+        </div>
+    </tr>
+    <tr>
+        <td height="50" align="center"><p>Find more electonics hot deals at <a href="localhost:8080/">wsumiedrogo.pl</a></p></td>
+    </tr>
+</table>
+</body>
+</html>
