@@ -13,7 +13,6 @@ import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 

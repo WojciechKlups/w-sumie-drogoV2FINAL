@@ -13,7 +13,9 @@ import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.security.UserDetailsServiceImpl;
 import pl.sda.wsumiedrogo.security.WebSecurityConfig;
-import pl.sda.wsumiedrogo.service.*;
+import pl.sda.wsumiedrogo.service.AccountService;
+import pl.sda.wsumiedrogo.service.CookieService;
+import pl.sda.wsumiedrogo.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
 
@@ -32,11 +34,17 @@ public class MainController {
     private LoginService loginService;
     private CheckoutService checkoutService;
     private RegistrationService registrationService;
+  private AccountService accountService;
 
     @Autowired
     public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
                           UserDetailsServiceImpl userDetailsService, LoginService loginService,
                           CheckoutService checkoutService,RegistrationService registrationService) {
+   
+
+    @Autowired
+    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
+                          UserDetailsServiceImpl userDetailsService, AccountService accountService) {
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
@@ -44,6 +52,7 @@ public class MainController {
         this.loginService = loginService;
         this.checkoutService = checkoutService;
         this.registrationService = registrationService;
+        this.accountService = accountService;
     }
 
 
@@ -53,22 +62,10 @@ public class MainController {
         return "index";
     }
 
+
     @GetMapping("/account")
-    public String getUserByEmail(Principal principal, HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        //W pierwszej wersji podajemy UserDto i z niego odczytujemy wszystkie dane
-        UserDto userDto = userService.getUserByEmail(email);
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-        model.addAttribute("user", userDto);
-        if (userDto.isActivated()) {
-
-            cookieService.createCookie(response, user);
-
-            return "account";
-        } else {
-            return "failedlogin";
-        }
+    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
+         return accountService.getAccount(userService, model, email, cookieService, user, response);
     }
 
     @GetMapping("/store")
