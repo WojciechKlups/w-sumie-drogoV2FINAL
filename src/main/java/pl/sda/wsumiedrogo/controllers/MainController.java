@@ -37,6 +37,7 @@ public class MainController {
     public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
                           UserDetailsServiceImpl userDetailsService, LoginService loginService,
                           CheckoutService checkoutService,RegistrationService registrationService) {
+
         this.userService = userService;
         this.cookieService = cookieService;
         this.webSecurityConfig = webSecurityConfig;
@@ -52,6 +53,21 @@ public class MainController {
 
         return "index";
     }
+
+    @GetMapping("/login")
+    public String login(HttpServletRequest request,
+                        @CookieValue(value = "username", defaultValue = "default") String username, Model model) {
+
+        return loginService.isLoggedIn(request, username, userService, model, cookieService);
+
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName();
+//        model.addAttribute("user",name);
+
+    }
+
+
+
 
     @GetMapping("/account")
     public String getUserByEmail(Principal principal, HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
@@ -90,17 +106,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/login")
-    public String login(HttpServletRequest request,
-                        @CookieValue(value = "username", defaultValue = "default") String username, Model model) {
 
-        return loginService.isLoggedIn(request, username, userService, model, cookieService);
-
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String name = auth.getName();
-//        model.addAttribute("user",name);
-
-    }
 
 
     @GetMapping("/checkout")
