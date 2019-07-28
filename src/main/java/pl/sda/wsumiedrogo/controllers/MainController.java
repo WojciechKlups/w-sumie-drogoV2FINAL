@@ -25,28 +25,16 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    private WebSecurityConfig webSecurityConfig;
     private UserService userService;
     private CookieService cookieService;
-    private UserDetailsServiceImpl userDetailsService;
     private LoginService loginService;
-    private CheckoutService checkoutService;
-    private RegistrationService registrationService;
-  private AccountService accountService;
 
     @Autowired
-    public MainController(CookieService cookieService, UserService userService, WebSecurityConfig webSecurityConfig,
-                          UserDetailsServiceImpl userDetailsService, LoginService loginService,
-                          CheckoutService checkoutService,RegistrationService registrationService, AccountService accountService) {
+    public MainController(CookieService cookieService, UserService userService, LoginService loginService) {
 
         this.userService = userService;
         this.cookieService = cookieService;
-        this.webSecurityConfig = webSecurityConfig;
-        this.userDetailsService = userDetailsService;
         this.loginService = loginService;
-        this.checkoutService = checkoutService;
-        this.registrationService = registrationService;
-        this.accountService = accountService;
     }
 
 
@@ -55,31 +43,6 @@ public class MainController {
 
         return "index";
     }
-
-
-    @GetMapping("/account")
-    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-         return accountService.getAccount(userService, model, email, cookieService, user, response);
-    }
-
-    @GetMapping("/store")
-    public String getStore() {
-        return "store";
-    }
-
-    @GetMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String getRegister() {
-        return "register";
-    }
-
-
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String postRegister(@ModelAttribute User user, Model model) throws EmailException {
-        return registrationService.registration(webSecurityConfig,userService,user,model);
-    }
-
 
     @GetMapping("/login")
     public String login(HttpServletRequest request,
@@ -91,13 +54,6 @@ public class MainController {
 //        String name = auth.getName();
 //        model.addAttribute("user",name);
 
-    }
-
-
-    @GetMapping("/checkout")
-    public String checkout(@ModelAttribute User user) {
-
-        return checkoutService.checkout(user);
     }
 }
 
