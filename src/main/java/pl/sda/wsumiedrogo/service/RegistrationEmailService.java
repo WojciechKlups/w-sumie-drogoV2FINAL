@@ -8,7 +8,7 @@ import pl.sda.wsumiedrogo.model.User;
 
 
 @Service
-public class EmailService {
+public class RegistrationEmailService {
     private String username="java13poz@gmail.com";
     private String password="JAV13sda";
 
