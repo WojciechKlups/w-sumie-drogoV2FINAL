@@ -34,6 +34,12 @@ public class UserService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
+    public UserDto getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(user -> userMapper.userToUserDto(user))
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
     public void createNewUser(User user) throws EmailException {
         String newActivationCode = RandomStringUtils.randomAlphanumeric(15);
         user.setActivationCode(newActivationCode);
