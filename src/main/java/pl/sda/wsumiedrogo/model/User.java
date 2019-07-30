@@ -15,15 +15,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
-public class User implements UserDetails{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,33 +66,34 @@ public class User implements UserDetails{
     private String activationCode;
     private boolean activated;
 
-    private Roles role = Roles.ROLE_USER;
+    private String roles = "";
+
+    private String permissions = "";
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Cart cart;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public String getRoles(){
+        return roles;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public String getPermissions(){
+        return permissions;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public List<String> getRoleList(){
+        if(this.roles.length() > 0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public List<String> getPermissionList(){
+        if(this.permissions.length() > 0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+
 }
