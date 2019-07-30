@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.sda.wsumiedrogo.mappers.UserMapper;
 import pl.sda.wsumiedrogo.service.CookieService;
 import pl.sda.wsumiedrogo.service.LoginService;
 import pl.sda.wsumiedrogo.service.UserService;
@@ -17,13 +18,16 @@ public class MainController {
     private UserService userService;
     private CookieService cookieService;
     private LoginService loginService;
+    private UserMapper userMapper;
 
     @Autowired
-    public MainController(CookieService cookieService, UserService userService, LoginService loginService) {
+    public MainController(CookieService cookieService, UserService userService,
+                          LoginService loginService,UserMapper userMapper) {
 
         this.userService = userService;
         this.cookieService = cookieService;
         this.loginService = loginService;
+        this.userMapper = userMapper;
     }
 
 
@@ -37,7 +41,7 @@ public class MainController {
     public String login(HttpServletRequest request,
                         @CookieValue(value = "username", defaultValue = "default") String username, Model model) {
 
-        return loginService.isLoggedIn(request, username, userService, model, cookieService);
+        return loginService.isLoggedIn(request, username, userService, model, cookieService,userMapper);
 
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        String name = auth.getName();
