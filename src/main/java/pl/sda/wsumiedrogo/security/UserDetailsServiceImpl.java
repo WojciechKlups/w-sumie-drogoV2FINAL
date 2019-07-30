@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.MyUserPrincipal;
 import pl.sda.wsumiedrogo.model.Roles;
 import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
+import pl.sda.wsumiedrogo.service.UserService;
 
 
 import java.util.Set;
@@ -20,18 +22,19 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private UserService userService;
     
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
+        User user = userService.getUserByEmail(email);
+
 
         MyUserPrincipal myUserPrincipal = new MyUserPrincipal(user);
 
