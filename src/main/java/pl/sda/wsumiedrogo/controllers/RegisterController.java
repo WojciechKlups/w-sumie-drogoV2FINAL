@@ -32,7 +32,7 @@ public class RegisterController {
     @GetMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public String getRegister() {
-        return "registerController";
+        return "register";
     }
 
 
