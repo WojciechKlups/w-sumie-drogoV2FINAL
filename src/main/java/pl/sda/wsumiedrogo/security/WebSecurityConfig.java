@@ -30,21 +30,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-/*                .sessionFixation().migrateSession()*/
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/cart").permitAll()
-                .antMatchers("/store").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/checkout").permitAll()
-                .antMatchers("/successpage").permitAll()
-                .antMatchers("/account").permitAll()
+                .antMatchers("/**","/login","/cart","/store","/register",
+                        "/checkout","/successpage","/account").permitAll()
                 .and()
-                .formLogin()
-                .usernameParameter("username")
-                .passwordParameter("password")
+                .formLogin().usernameParameter("username").passwordParameter("password")
                 .loginPage("/login")
                 .failureUrl("/failedlogin")
                 .loginProcessingUrl("/account")
@@ -55,10 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(false)
                 .logoutSuccessUrl("/successlogout")
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .authorizeRequests()
+                .anyRequest()
+                .fullyAuthenticated();
     }
-
-    //cart tylko dla userow ale to nie dziala wiec ebac
-
 
 }

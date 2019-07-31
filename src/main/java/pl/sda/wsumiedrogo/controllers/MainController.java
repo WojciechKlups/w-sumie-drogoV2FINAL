@@ -1,6 +1,8 @@
 package pl.sda.wsumiedrogo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -11,23 +13,20 @@ import pl.sda.wsumiedrogo.service.LoginService;
 import pl.sda.wsumiedrogo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class MainController {
 
-    private UserService userService;
-    private CookieService cookieService;
+
     private LoginService loginService;
-    private UserMapper userMapper;
+
 
     @Autowired
-    public MainController(CookieService cookieService, UserService userService,
-                          LoginService loginService,UserMapper userMapper) {
+    public MainController(LoginService loginService) {
 
-        this.userService = userService;
-        this.cookieService = cookieService;
         this.loginService = loginService;
-        this.userMapper = userMapper;
+
     }
 
 
@@ -39,9 +38,17 @@ public class MainController {
 
     @GetMapping("/login")
     public String login(HttpServletRequest request,
-                        @CookieValue(value = "username", defaultValue = "default") String username, Model model) {
+                        @CookieValue(value = "username", defaultValue = "default") String username, Model model,
+                        Principal principal) {
 
-        return loginService.isLoggedIn(request, username, userService, model, cookieService,userMapper);
+        Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal == null){
+            return "login";
+        } else {
+            return "account";
+        }
+
+        //return loginService.isLoggedIn(request, username, model);
 
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        String name = auth.getName();

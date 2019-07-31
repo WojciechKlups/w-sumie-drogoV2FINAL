@@ -6,11 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.sda.wsumiedrogo.mappers.UserMapper;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.service.AccountService;
-import pl.sda.wsumiedrogo.service.CookieService;
-import pl.sda.wsumiedrogo.service.UserService;
+
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,21 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 public class AccountsController {
 
     private AccountService accountService;
-    private UserService userService;
-    private CookieService cookieService;
-    private UserMapper userMapper;
+
 
     @Autowired
-    public AccountsController(AccountService accountService, UserService userService,
-                              CookieService cookieService,UserMapper userMapper) {
+    public AccountsController(AccountService accountService) {
         this.accountService = accountService;
-        this.userService = userService;
-        this.cookieService = cookieService;
-        this.userMapper = userMapper;
+
     }
 
     @GetMapping("/account")
-    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model, @ModelAttribute User user) {
-        return accountService.getAccount(userService, model, email, cookieService, user, response,userMapper);
+    public String getUserByEmail(HttpServletResponse response, @RequestParam String email, Model model,
+                                 @ModelAttribute User user) {
+        return accountService.getAccount(model,email,user,response);
     }
 }

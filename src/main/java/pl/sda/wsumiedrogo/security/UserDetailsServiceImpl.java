@@ -33,10 +33,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userService.getUserByEmail(email);
+        UserDto userDto = userService.getUserByEmail(email);
 
-
-        MyUserPrincipal myUserPrincipal = new MyUserPrincipal(user);
+        //TODO: Zmiana na USERDTO powoduje, że model userdetails z MyUserprincipal się sypie
+        // gdyż potrzebuje Usera a nie useraDto nie wiem czy Userdto w tamtym miejscu to dobry pomysł
+        MyUserPrincipal myUserPrincipal = new MyUserPrincipal(userDto);
 
 
 //        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(

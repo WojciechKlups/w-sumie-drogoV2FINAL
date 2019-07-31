@@ -1,5 +1,6 @@
 package pl.sda.wsumiedrogo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.sda.wsumiedrogo.mappers.UserMapper;
@@ -11,19 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class AccountService {
 
-    public String getAccount(UserService userService, Model model,
-                             String email, CookieService cookieService, User user,
-                             HttpServletResponse response, UserMapper userMapper) {
-        User userByEmail = userService.getUserByEmail(email);
+    private UserMapper userMapper;
+    private UserService userService;
+    private CookieService cookieService;
 
-        UserDto userDto = userMapper.userToUserDto(userByEmail);
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        model.addAttribute("user", userDto);
-        if (userDto.isActivated()) {
-            cookieService.createCookie(response, user);
-            return "account";
-        } else {
-            return "failedlogin";
-        }
+    @Autowired
+    public AccountService(UserMapper userMapper, UserService userService, CookieService cookieService) {
+        this.userMapper = userMapper;
+        this.userService = userService;
+        this.cookieService = cookieService;
+    }
+
+    public String getAccount(Model model,String email, User user,HttpServletResponse response) {
+        UserDto userByEmail = userService.getUserByEmail(email);
+
+
+        model.addAttribute("user", userByEmail);
+        //TODO Zmiana na user DTO powoduje, że nie posiada on pola isActivated. Prawdopodobnie poprawa logowania powinna temu zaradzić
+//        if (userDto.isActivated()) {
+//            cookieService.createCookie(response, user);
+//            return "account";
+//        } else {
+//            return "failedlogin";
+//        }
     }
 }

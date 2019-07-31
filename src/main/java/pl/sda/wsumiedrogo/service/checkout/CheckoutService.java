@@ -1,4 +1,4 @@
-package pl.sda.wsumiedrogo.service;
+package pl.sda.wsumiedrogo.service.checkout;
 
 import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.User;
