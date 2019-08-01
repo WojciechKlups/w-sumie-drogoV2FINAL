@@ -16,28 +16,26 @@ import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
 import pl.sda.wsumiedrogo.service.UserService;
 
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserService userService;
-    
+    private UserRepository userRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserService userService) {
-        this.userService = userService;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDto userDto = userService.getUserByEmail(email);
+        User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
 
-        //TODO: Zmiana na USERDTO powoduje, że model userdetails z MyUserprincipal się sypie
-        // gdyż potrzebuje Usera a nie useraDto nie wiem czy Userdto w tamtym miejscu to dobry pomysł
-        MyUserPrincipal myUserPrincipal = new MyUserPrincipal(userDto);
+        MyUserPrincipal myUserPrincipal = new MyUserPrincipal(user);
 
 
 //        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(

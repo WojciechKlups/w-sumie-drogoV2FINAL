@@ -24,16 +24,16 @@ public class AccountService {
     }
 
     public String getAccount(Model model,String email, User user,HttpServletResponse response) {
-        UserDto userByEmail = userService.getUserByEmail(email);
+        User userByEmail = userService.getUserByEmail(email);
 
 
         model.addAttribute("user", userByEmail);
         //TODO Zmiana na user DTO powoduje, że nie posiada on pola isActivated. Prawdopodobnie poprawa logowania powinna temu zaradzić
-//        if (userDto.isActivated()) {
-//            cookieService.createCookie(response, user);
-//            return "account";
-//        } else {
-//            return "failedlogin";
-//        }
+        if (userByEmail.isActivated()) {
+            cookieService.createCookie(response, user);
+            return "account";
+        } else {
+            return "failedlogin";
+        }
     }
 }

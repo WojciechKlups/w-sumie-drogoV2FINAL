@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**","/login","/cart","/store","/register",
                         "/checkout","/successpage","/account").permitAll()
                 .and()
-                .formLogin().usernameParameter("username").passwordParameter("password")
+                .formLogin()
                 .loginPage("/login")
                 .failureUrl("/failedlogin")
                 .loginProcessingUrl("/account")

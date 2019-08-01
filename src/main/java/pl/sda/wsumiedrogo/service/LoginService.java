@@ -29,9 +29,9 @@ public class LoginService {
             return "login";
         } else {
 
-            UserDto userDto = userService.getUserByEmail(username);
+            User user = userService.getUserByEmail(username);
 
-            model.addAttribute("user", userDto);
+            model.addAttribute("user", user);
             cookieService.getUserFromCookie(request, username);
 
             return "account";
