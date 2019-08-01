@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FrontendController {
 
-    @GetMapping("templates/header")
-    public String header() {
-        return "header";
-    }
+//    @GetMapping("pastedparts/header")
+//    public String header() {
+//        return "pastedparts/header";
+//    }
 
     @GetMapping("templates/footer")
     public String footer() {
