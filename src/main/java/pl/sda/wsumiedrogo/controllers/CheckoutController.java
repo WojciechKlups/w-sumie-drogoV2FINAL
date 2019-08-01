@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.sda.wsumiedrogo.model.User;
-import pl.sda.wsumiedrogo.service.CheckoutService;
+import pl.sda.wsumiedrogo.service.checkout.CheckoutService;
 
 @Controller
 public class CheckoutController {

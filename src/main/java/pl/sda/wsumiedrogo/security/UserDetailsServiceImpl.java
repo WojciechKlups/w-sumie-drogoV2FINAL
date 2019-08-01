@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.MyUserPrincipal;
 import pl.sda.wsumiedrogo.model.Roles;
 import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
+import pl.sda.wsumiedrogo.service.UserService;
 
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,7 +24,6 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private UserRepository userRepository;
-    
 
     @Autowired
     public UserDetailsServiceImpl(UserRepository userRepository) {

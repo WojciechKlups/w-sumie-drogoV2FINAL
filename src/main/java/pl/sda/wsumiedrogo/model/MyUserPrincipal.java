@@ -3,6 +3,7 @@ package pl.sda.wsumiedrogo.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.Collection;
