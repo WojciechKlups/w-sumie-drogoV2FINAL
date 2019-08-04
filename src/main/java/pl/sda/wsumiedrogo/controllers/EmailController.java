@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import pl.sda.wsumiedrogo.service.CheckoutEmailService;
+import pl.sda.wsumiedrogo.service.checkout.CheckoutEmailService;
 
 @Controller
 public class EmailController {

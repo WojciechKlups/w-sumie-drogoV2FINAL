@@ -8,6 +8,7 @@ import pl.sda.wsumiedrogo.mappers.UserMapper;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.model.dto.UserDto;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
+import pl.sda.wsumiedrogo.service.registration.RegistrationEmailService;
 
 @Service
 public class UserService {
@@ -28,9 +29,8 @@ public class UserService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    public UserDto getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(user -> userMapper.userToUserDto(user))
                 .orElseThrow(ResourceNotFoundException::new);
     }
 

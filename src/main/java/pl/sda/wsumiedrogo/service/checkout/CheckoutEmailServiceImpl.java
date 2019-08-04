@@ -1,4 +1,4 @@
-package pl.sda.wsumiedrogo.service;
+package pl.sda.wsumiedrogo.service.checkout;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;

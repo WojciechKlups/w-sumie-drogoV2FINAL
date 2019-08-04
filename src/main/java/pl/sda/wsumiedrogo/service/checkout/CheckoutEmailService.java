@@ -1,4 +1,4 @@
-package pl.sda.wsumiedrogo.service;
+package pl.sda.wsumiedrogo.service.checkout;
 
 
 public interface CheckoutEmailService {

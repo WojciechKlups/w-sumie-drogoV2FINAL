@@ -7,12 +7,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.sda.wsumiedrogo.model.MyUserPrincipal;
 import pl.sda.wsumiedrogo.model.Roles;
 import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
+import pl.sda.wsumiedrogo.service.UserService;
 
-import java.util.Arrays;
+
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,13 +35,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
 
+        MyUserPrincipal myUserPrincipal = new MyUserPrincipal(user);
 
-        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                authorities(Arrays.stream(Roles.values()).collect(Collectors.toSet())));
 
-        return userDetails;
+//        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
+//                user.getEmail(),
+//                user.getPassword(),
+//                authorities(Arrays.stream(Roles.values()).collect(Collectors.toSet())));
+
+
+
+        return myUserPrincipal;
     }
 
     Set<GrantedAuthority> authorities(Set<Roles> userRole){

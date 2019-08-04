@@ -3,6 +3,7 @@ package pl.sda.wsumiedrogo.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.sda.wsumiedrogo.model.User;
+import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 import java.util.Optional;
 

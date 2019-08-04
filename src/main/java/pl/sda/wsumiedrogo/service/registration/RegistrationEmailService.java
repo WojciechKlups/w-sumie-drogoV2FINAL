@@ -1,4 +1,4 @@
-package pl.sda.wsumiedrogo.service;
+package pl.sda.wsumiedrogo.service.registration;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
