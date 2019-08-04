@@ -34,6 +34,11 @@ public class MainController {
 
         return "index";
     }
+    @GetMapping("/store")
+    public String store(@CookieValue(value = "username", defaultValue = "default") String username) {
+
+        return "store";
+    }
 
     @GetMapping("/login")
     public String login(HttpServletRequest request,
