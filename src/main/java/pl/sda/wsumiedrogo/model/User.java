@@ -20,7 +20,12 @@ import java.util.*;
 @Builder
 public class User {
 
-    //https://github.com/karolinach/Store/blob/master/src/main/java/pl/edu/pw/javaee/store/model/Customer.java
+    //http://learningprogramming.net/java/spring-mvc/build-shopping-cart-in-spring-mvc/
+    //https://sivalabs.in/2015/12/jcart-view-cart/
+    //http://docs.tradenity.com/kb/tutorials/java/springmvc/03_cart.html
+    //https://www.baeldung.com/spring-angular-ecommerce
+    //https://github.com/reljicd/spring-boot-shopping-cart
+    //https://o7planning.org/en/10683/create-a-shopping-cart-web-application-with-spring-boot-hibernate
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
