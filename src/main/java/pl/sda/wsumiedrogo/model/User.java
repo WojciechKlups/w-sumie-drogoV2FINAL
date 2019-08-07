@@ -1,7 +1,3 @@
-/*
- * Written by Wojciech Klupś
- * Copyright (c) 2019. All rights reserved
- */
 
 package pl.sda.wsumiedrogo.model;
 
@@ -24,6 +20,8 @@ import java.util.*;
 @Builder
 public class User {
 
+    //https://github.com/karolinach/Store/blob/master/src/main/java/pl/edu/pw/javaee/store/model/Customer.java
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -37,9 +35,6 @@ public class User {
     @NotNull
     @NotEmpty
     private String lastName;
-    @NotNull
-    @NotEmpty
-    private String address;
     @NotNull
     @NotEmpty
     private String postalCode;
