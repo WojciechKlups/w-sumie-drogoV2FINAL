@@ -47,7 +47,7 @@ public class MainController {
                         Principal principal) {
 
         Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal == null){
+        if(username.equals("default")){
             return "login";
         } else {
             return "account";
