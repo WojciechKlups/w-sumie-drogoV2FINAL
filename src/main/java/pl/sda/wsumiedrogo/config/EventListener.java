@@ -41,7 +41,7 @@ public class EventListener {
         user.setUsername("kowalski");
         user.setEmail("kowalski@gmail.com");
         user.setPassword("1234");
-        user.setAddress("ul.Januszowa 5");
+        // user.setAddress("ul.Januszowa 5");
         user.setPostalCode("60-123");
         user.setCity("Poznan");
         user.setRoles("USER");

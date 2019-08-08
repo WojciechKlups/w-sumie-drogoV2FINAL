@@ -1,12 +1,10 @@
-
 package pl.sda.wsumiedrogo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -19,13 +17,6 @@ import java.util.*;
 @Entity
 @Builder
 public class User {
-
-    //http://learningprogramming.net/java/spring-mvc/build-shopping-cart-in-spring-mvc/
-    //https://sivalabs.in/2015/12/jcart-view-cart/
-    //http://docs.tradenity.com/kb/tutorials/java/springmvc/03_cart.html
-    //https://www.baeldung.com/spring-angular-ecommerce
-    //https://github.com/reljicd/spring-boot-shopping-cart
-    //https://o7planning.org/en/10683/create-a-shopping-cart-web-application-with-spring-boot-hibernate
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +31,7 @@ public class User {
     @NotNull
     @NotEmpty
     private String lastName;
+
     @NotNull
     @NotEmpty
     private String postalCode;
@@ -88,7 +80,7 @@ public class User {
         return new ArrayList<>();
     }
 
-    public List<String> getPermissionList(){
+    private List<String> getPermissionList(){
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));
         }
