@@ -8,36 +8,33 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 @Data
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Builder
-public class Product implements Serializable {
+public class OrderDetails implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    private String name;
-    @NotNull
-    private String code;
+    private int amount;
     @NotNull
     private double price;
     @NotNull
-    private String brand;
-    @NotNull
-    private Category category;
-    @NotNull
-    private boolean onStock;
-    @NotNull
-    private int weight;
-    @NotNull
     private int quantity;
 
-    //
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private Set<Cart> carts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id" )
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
+
 }

@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -81,7 +80,7 @@ public class User {
         return new ArrayList<>();
     }
 
-    public List<String> getPermissionList(){
+    private List<String> getPermissionList(){
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));
         }

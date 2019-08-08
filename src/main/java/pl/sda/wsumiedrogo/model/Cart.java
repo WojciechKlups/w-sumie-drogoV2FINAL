@@ -23,7 +23,7 @@ public class Cart {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> products;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }
