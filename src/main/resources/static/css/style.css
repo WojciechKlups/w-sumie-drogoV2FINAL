@@ -2193,3 +2193,41 @@ textarea.input {
     margin-top: 10px;
   }
 }
+
+/*
+CONTACTFORM STYLING
+*/
+.contactForm {
+    width: 100%;
+    max-width: 484px;
+    border-radius: 5px;
+    margin: auto;
+    padding: 30px 40px 20px;
+
+}
+.contactForm .form-control{
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid #222222;
+    background-color: transparent !important;
+    color: #222222;
+    margin-bottom: 2rem;
+    outline:none;
+}
+.contactForm ::placeholder{color: #222222;}
+input.btn-login {
+    display: block;
+    margin: auto;
+    text-align: center;
+    background-color: #3dce8c;
+    border: 1px solid #3dce8c;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #ffffff;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 10px 50px;
+    outline: none;
+    box-shadow: 0px 0px 10px 0px #00000059;
+}
+

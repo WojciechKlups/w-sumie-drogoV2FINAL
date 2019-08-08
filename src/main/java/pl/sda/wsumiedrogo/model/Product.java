@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
@@ -21,23 +18,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Podaj nazwę produktu")
     private String name;
-    @Min(value = 0, message = "Cena produktu nie może być mniejsza niż zero")
     private double price;
-
-    private String description;
-    private String manufacturer;
-    private String category;
-
-    @Min(value = 0, message = "Liczba sztuk produktu nie może być mniejsza niż zero")
-    private int unitsInStock;
+    private Category category;
+    private boolean onStock;
     private int weight;
+    private int quantity;
 
-    @Transient
-    private MultipartFile image;
-
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "products")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Set<Cart> carts;
 }
