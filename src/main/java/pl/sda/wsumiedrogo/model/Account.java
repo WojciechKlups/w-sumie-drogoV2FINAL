@@ -23,12 +23,11 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    String userName;
-    @NotNull
+
+    String username;
+
     boolean active;
-    @NotNull
-    String encryptedPassword;
-    @NotNull
+
+
     String userRole;
 }

@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -27,14 +26,14 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+
     private double amount;
-    @NotNull
-    private Address address;
-    @NotNull
-    private UserDto userDto;
-    @NotNull
+
+    //private Address address;
+
+    //private UserDto userDto;
+
     private LocalDateTime orderDate;
-    @NotNull
+
     private int orderNumber;
 }

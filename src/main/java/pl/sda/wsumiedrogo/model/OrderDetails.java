@@ -20,11 +20,11 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+
     private int amount;
-    @NotNull
+
     private double price;
-    @NotNull
+
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)

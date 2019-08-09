@@ -47,12 +47,10 @@ public class User {
     @Column(unique = true)
     private Long phoneNumber;
 
-    @NotNull
-    @NotEmpty
+
     @Column(unique = true)
     private String email;
-    @NotNull
-    @NotEmpty
+
     private String password;
 
     private String activationCode;
@@ -64,28 +62,5 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Cart cart;
-
-    public String getRoles(){
-        return roles;
-    }
-
-    public String getPermissions(){
-        return permissions;
-    }
-
-    public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    private List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
-
 
 }
