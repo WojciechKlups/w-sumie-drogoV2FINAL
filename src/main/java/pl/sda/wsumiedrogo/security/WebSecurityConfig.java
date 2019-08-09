@@ -1,22 +1,13 @@
 package pl.sda.wsumiedrogo.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -34,12 +25,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .and()
-                .authorizeRequests()
-                .antMatchers("/**","/login","/cart","/store","/register",
-                        "/checkout","/successpage","/account").permitAll()
+        http.csrf().disable();
+
+        permitAllAccess(http);
+
+        adminAndUserAccess(http);
+
+        adminAccess(http);
+
+        http.authorizeRequests().and()
+                .exceptionHandling()
+                .accessDeniedPage("/403");
+
+        loginAndLogoutHandler(http);
+
+    }
+
+    private void loginAndLogoutHandler(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -50,12 +53,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/custom-logout")
                 .deleteCookies("username")
                 .invalidateHttpSession(false)
-                .logoutSuccessUrl("/successlogout")
-                .and()
-                .csrf().disable()
-                .authorizeRequests()
-                .anyRequest()
-                .fullyAuthenticated();
+                .logoutSuccessUrl("/successlogout");
+    }
+
+    private void adminAndUserAccess(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
+                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+    }
+
+    private void permitAllAccess(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/**","/login","/cart","/store","/register",
+                        "/checkout","/successpage","/account").permitAll();
+    }
+
+    private void adminAccess(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/admin/product")
+                .access("hasRole('ROLE_ADMIN')");
     }
 
 }

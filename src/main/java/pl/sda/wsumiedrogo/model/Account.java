@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -26,8 +25,9 @@ public class Account implements Serializable {
 
     String username;
 
-    boolean active;
+    String encryptedPassword;
 
+    boolean active;
 
     String userRole;
 }
