@@ -1,9 +1,11 @@
 package pl.sda.wsumiedrogo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import pl.sda.wsumiedrogo.model.Cart;
 import pl.sda.wsumiedrogo.model.Product;
+import pl.sda.wsumiedrogo.model.Role;
 import pl.sda.wsumiedrogo.repositories.CartRepository;
 import pl.sda.wsumiedrogo.repositories.ProductsRepository;
 

@@ -27,51 +27,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        permitAllAccess(http);
+        http.authorizeRequests()
+                .antMatchers("/**","/login","/cart","/store","/register",
+                        "/checkout","/successpage","/account").permitAll();
 
-        adminAndUserAccess(http);
+        http.authorizeRequests()
+                .antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
+                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
-        adminAccess(http);
+        http.authorizeRequests()
+                .antMatchers("/admin/product")
+                .access("hasRole('ROLE_ADMIN')");
 
         http.authorizeRequests().and()
                 .exceptionHandling()
                 .accessDeniedPage("/403");
 
-        loginAndLogoutHandler(http);
-
-    }
-
-    private void loginAndLogoutHandler(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/failedlogin")
-                .loginProcessingUrl("/account")
+                //.loginProcessingUrl("/account")
                 .and()
                 .logout()
                 .logoutUrl("/custom-logout")
                 .deleteCookies("username")
                 .invalidateHttpSession(false)
                 .logoutSuccessUrl("/successlogout");
+
     }
 
-    private void adminAndUserAccess(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
-                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-    }
-
-    private void permitAllAccess(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/**","/login","/cart","/store","/register",
-                        "/checkout","/successpage","/account").permitAll();
-    }
-
-    private void adminAccess(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/admin/product")
-                .access("hasRole('ROLE_ADMIN')");
-    }
 
 }

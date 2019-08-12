@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.sda.wsumiedrogo.model.*;
 import pl.sda.wsumiedrogo.repositories.ProductsRepository;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
@@ -12,11 +13,13 @@ public class EventListener {
 
     private UserRepository userRepository;
     private ProductsRepository productsRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EventListener(UserRepository userRepository, ProductsRepository productsRepository) {
+    public EventListener(UserRepository userRepository, ProductsRepository productsRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.productsRepository = productsRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @org.springframework.context.event.EventListener(ApplicationReadyEvent.class)
@@ -40,11 +43,11 @@ public class EventListener {
         user.setLastName("Kowalski");
         user.setUsername("kowalski");
         user.setEmail("kowalski@gmail.com");
-        user.setPassword("1234");
+        user.setPassword(passwordEncoder.encode("1234"));
         // user.setAddress("ul.Januszowa 5");
         user.setPostalCode("60-123");
         user.setCity("Poznan");
-        user.setRoles("USER");
+        //user.setRoles("USER");
         user.setPhoneNumber(502676950L);
         user.setActivated(true);
         user.setCart(cart);

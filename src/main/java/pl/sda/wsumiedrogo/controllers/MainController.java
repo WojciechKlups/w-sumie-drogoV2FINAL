@@ -31,7 +31,7 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String home(@CookieValue(value = "username", defaultValue = "default") String username) {
+    public String home(@CookieValue(value = "username", defaultValue = "default") String username, Authentication authentication) {
 
         return "index";
     }
@@ -46,12 +46,10 @@ public class MainController {
                         @CookieValue(value = "username", defaultValue = "default") String username, Model model,
                         Principal principal) {
 
-        Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(username.equals("default")){
+       // Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
             return "login";
-        } else {
-            return "account";
-        }
+
 
         //return loginService.isLoggedIn(request, username, model);
 
