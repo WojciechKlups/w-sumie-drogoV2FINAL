@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.sda.wsumiedrogo.mappers.UserMapper;
-import pl.sda.wsumiedrogo.service.CookieService;
+
 import pl.sda.wsumiedrogo.service.LoginService;
 import pl.sda.wsumiedrogo.service.UserService;
 

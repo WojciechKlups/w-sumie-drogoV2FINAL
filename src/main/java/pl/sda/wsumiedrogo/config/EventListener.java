@@ -6,19 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.sda.wsumiedrogo.model.*;
-import pl.sda.wsumiedrogo.repositories.ProductsRepository;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 @Configuration
 public class EventListener {
 
     private UserRepository userRepository;
-    private ProductsRepository productsRepository;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EventListener(UserRepository userRepository, ProductsRepository productsRepository, PasswordEncoder passwordEncoder) {
+    public EventListener(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.productsRepository = productsRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -33,10 +30,8 @@ public class EventListener {
         maczek.setOnStock(true);
         maczek.setWeight(3);
         maczek.setQuantity(1);
-        productsRepository.save(maczek);
 
         User user = new User();
-        Cart cart = new Cart();
 
         user.setId(1L);
         user.setFirstName("Jan");
@@ -50,7 +45,6 @@ public class EventListener {
         //user.setRoles("USER");
         user.setPhoneNumber(502676950L);
         user.setActivated(true);
-        user.setCart(cart);
         userRepository.save(user);
     }
 }

@@ -49,7 +49,4 @@ public class User {
     private boolean activated;
 
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Cart cart;
-
 }

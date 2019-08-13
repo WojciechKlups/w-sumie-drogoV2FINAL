@@ -37,7 +37,4 @@ public class Product implements Serializable {
 
     private int quantity;
 
-    //
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private Set<Cart> carts;
 }
