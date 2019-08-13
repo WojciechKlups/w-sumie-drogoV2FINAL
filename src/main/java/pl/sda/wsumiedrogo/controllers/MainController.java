@@ -41,14 +41,9 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request,
-                        @CookieValue(value = "username", defaultValue = "default") String username, Model model,
-                        Principal principal) {
-
-       // Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String login(HttpServletRequest request, Model model) {
 
             return "login";
-
 
         //return loginService.isLoggedIn(request, username, model);
 
