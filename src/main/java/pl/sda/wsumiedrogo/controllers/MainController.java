@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.sda.wsumiedrogo.mappers.UserMapper;
-import pl.sda.wsumiedrogo.service.CookieService;
+
 import pl.sda.wsumiedrogo.service.LoginService;
 import pl.sda.wsumiedrogo.service.UserService;
 
@@ -31,7 +30,7 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String home(@CookieValue(value = "username", defaultValue = "default") String username) {
+    public String home(@CookieValue(value = "username", defaultValue = "default") String username, Authentication authentication) {
 
         return "index";
     }
@@ -42,16 +41,9 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request,
-                        @CookieValue(value = "username", defaultValue = "default") String username, Model model,
-                        Principal principal) {
+    public String login(HttpServletRequest request, Model model) {
 
-        Object principal1 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(username.equals("default")){
             return "login";
-        } else {
-            return "account";
-        }
 
         //return loginService.isLoggedIn(request, username, model);
 

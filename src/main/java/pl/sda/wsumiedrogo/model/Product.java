@@ -20,24 +20,21 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+
     private String name;
-    @NotNull
+
     private String code;
-    @NotNull
+
     private double price;
-    @NotNull
+
     private String brand;
-    @NotNull
+
     private Category category;
-    @NotNull
+
     private boolean onStock;
-    @NotNull
+
     private int weight;
-    @NotNull
+
     private int quantity;
 
-    //
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private Set<Cart> carts;
 }

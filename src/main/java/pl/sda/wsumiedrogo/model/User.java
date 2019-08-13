@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -21,22 +18,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
-    @NotEmpty
+
     @Column(unique = true)
     private String username;
-    @NotNull
-    @NotEmpty
+
     private String firstName;
-    @NotNull
-    @NotEmpty
+
     private String lastName;
 
-    @NotNull
-    @NotEmpty
+
     private String postalCode;
-    @NotNull
-    @NotEmpty
+
     private String city;
 
 
@@ -47,45 +39,14 @@ public class User {
     @Column(unique = true)
     private Long phoneNumber;
 
-    @NotNull
-    @NotEmpty
+
     @Column(unique = true)
     private String email;
-    @NotNull
-    @NotEmpty
+
     private String password;
 
     private String activationCode;
     private boolean activated;
-
-    private String roles = "";
-
-    private String permissions = "";
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Cart cart;
-
-    public String getRoles(){
-        return roles;
-    }
-
-    public String getPermissions(){
-        return permissions;
-    }
-
-    public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    private List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
 
 
 }

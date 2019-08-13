@@ -14,13 +14,11 @@ public class AccountService {
 
     private UserMapper userMapper;
     private UserService userService;
-    private CookieService cookieService;
 
     @Autowired
-    public AccountService(UserMapper userMapper, UserService userService, CookieService cookieService) {
+    public AccountService(UserMapper userMapper, UserService userService) {
         this.userMapper = userMapper;
         this.userService = userService;
-        this.cookieService = cookieService;
     }
 
     public String getAccount(Model model,String email, User user,HttpServletResponse response) {
@@ -30,7 +28,6 @@ public class AccountService {
         model.addAttribute("user", userByEmail);
         //TODO Zmiana na user DTO powoduje, że nie posiada on pola isActivated. Prawdopodobnie poprawa logowania powinna temu zaradzić
         if (userByEmail.isActivated()) {
-            cookieService.createCookie(response, user);
             return "account";
         } else {
             return "failedlogin";

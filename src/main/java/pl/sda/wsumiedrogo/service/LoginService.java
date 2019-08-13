@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.sda.wsumiedrogo.mappers.UserMapper;
 import pl.sda.wsumiedrogo.model.User;
-import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,13 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginService {
 
     private UserMapper userMapper;
-    private CookieService cookieService;
     private UserService userService;
 
     @Autowired
-    public LoginService(UserMapper userMapper, CookieService cookieService, UserService userService) {
+    public LoginService(UserMapper userMapper, UserService userService) {
         this.userMapper = userMapper;
-        this.cookieService = cookieService;
         this.userService = userService;
     }
 
@@ -32,7 +29,6 @@ public class LoginService {
             User user = userService.getUserByEmail(username);
 
             model.addAttribute("user", user);
-            cookieService.getUserFromCookie(request, username);
 
             return "account";
         }

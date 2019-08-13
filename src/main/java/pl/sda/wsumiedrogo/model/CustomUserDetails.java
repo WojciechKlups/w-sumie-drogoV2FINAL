@@ -9,31 +9,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MyUserPrincipal implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private User user;
 
-    public MyUserPrincipal(User user) {
+    public CustomUserDetails(User user) {
         this.user = user;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        //Extract list of permissions(name)
-        this.user.getPermissionList().forEach(p -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority(p);
-            authorities.add(authority);
-        });
-        //Extract list of roles(ROLE_name)
-        this.user.getPermissionList().forEach(r -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+r);
-            authorities.add(authority);
-        });
-
-        return authorities;
+        return null;
     }
 
     @Override
