@@ -41,7 +41,8 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
+    public String login(HttpServletRequest request, Model model, Authentication authentication) {
+
 
             return "login";
 
