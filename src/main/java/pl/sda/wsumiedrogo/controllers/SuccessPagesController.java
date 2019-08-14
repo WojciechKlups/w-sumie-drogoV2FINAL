@@ -9,10 +9,17 @@ public class SuccessPagesController {
     public String successpage() {
         return "successpages/successpage";
     }
+
     @GetMapping("/successlogout")
     public String successlogout() {
         return "successpages/successlogout";
     }
+
+    @GetMapping("/failedlogin")
+    public String failedlogin() {
+        return "successpages/failedlogin";
+    }
+
 //    @GetMapping("/successcheckout")
 //    public String successcheckout() {
 //        return "successpages/successcheckout";
