@@ -3,9 +3,10 @@ package pl.sda.wsumiedrogo.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.sda.wsumiedrogo.model.*;
+import pl.sda.wsumiedrogo.model.Category;
+import pl.sda.wsumiedrogo.model.Product;
+import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 @Configuration
 public class EventListener {
@@ -33,18 +34,19 @@ public class EventListener {
 
         User user = new User();
 
-        user.setId(1L);
+        user.setUsername("kowalski");
         user.setFirstName("Jan");
         user.setLastName("Kowalski");
-        user.setUsername("kowalski");
+        user.setPhoneNumber(123_456_789L);
         user.setEmail("kowalski@gmail.com");
         user.setPassword(passwordEncoder.encode("1234"));
-        // user.setAddress("ul.Januszowa 5");
-        user.setPostalCode("60-123");
-        user.setCity("Poznan");
-        //user.setRoles("USER");
-        user.setPhoneNumber(502676950L);
         user.setActivated(true);
+
+        user.setAddress("Polanka 63");
+        user.setCity("Poznań");
+        user.setCountry("Poland");
+        user.setZipCode("61-131");
+
         userRepository.save(user);
     }
 }
