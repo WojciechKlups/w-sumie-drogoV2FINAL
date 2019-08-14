@@ -21,12 +21,13 @@ public class EmailController {
 
     @GetMapping("/successcheckout")
     public String send() {
+        //TODO: To powinien być servis
         Context context = new Context();
         context.setVariable("header", "W_Sumie_Drogo order details");
         context.setVariable("title", "Thank you for your order!");
         context.setVariable("description", "You have to pay price below");
         String body = templateEngine.process("order-confirmation", context);
-        emailSender.sendEmail("wojciech.klups@gmail.com", "W_Sumie_Drogo Order confirmation", body);
+        emailSender.sendEmail("wojciech.klups@gmail.com", "W_Sumie_Drogo order confirmation", body);
         return "successcheckout";
     }
 }

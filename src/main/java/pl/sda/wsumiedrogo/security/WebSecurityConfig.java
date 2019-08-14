@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(10);
     }
 
-
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/product")
                 .access("hasRole('ROLE_ADMIN')");
 
-        http.authorizeRequests().and()
-                .exceptionHandling()
-                .accessDeniedPage("/403");
+//        http.authorizeRequests().and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/403");
 
         http.authorizeRequests()
                 .and()
@@ -49,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .failureUrl("/failedlogin")
                 //.loginProcessingUrl("/account")
+                .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .logout()
                 .logoutUrl("/custom-logout")
