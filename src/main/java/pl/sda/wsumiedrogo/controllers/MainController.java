@@ -9,6 +9,8 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
+    //testing commits and pushes
+
     @GetMapping("/")
     public String home(Authentication authentication,Principal principal) {
 
