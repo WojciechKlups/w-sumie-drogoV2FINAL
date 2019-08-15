@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
 
 @Data
@@ -13,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "user")
 public class User {
 
     @Id
@@ -21,32 +21,26 @@ public class User {
 
     @Column(unique = true)
     private String username;
-
     private String firstName;
-
     private String lastName;
-
-
-    private String postalCode;
-
-    private String city;
-
-
     private String image = "../img/user.png";
-
     private boolean isLoggedIn = false;
-
     @Column(unique = true)
     private Long phoneNumber;
-
-
     @Column(unique = true)
     private String email;
-
     private String password;
-
     private String activationCode;
     private boolean activated;
+
+    private String address;
+    private String city;
+    private String country;
+    private String zipCode;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_id",referencedColumnName = "id")
+//    private Address address;
 
 
 }

@@ -12,7 +12,7 @@ import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
 import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
 
-import java.util.*;
+import java.util.Collections;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,32 +27,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-//        Poprzednia implementacja
-        User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
+
+       User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
-
-//        if (account == null) {
-//            throw new UsernameNotFoundException("User " //
-//                    + email + " was not found in the database");
-//        }
-
-//        String role = account.getUserRole();
-//
-//        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-//
-//        GrantedAuthority authority = new SimpleGrantedAuthority(role);
-//
-//        grantedAuthorityList.add(authority);
-//
-//        boolean enabled = account.isActive();
-//        boolean accountNonExpired = true;
-//        boolean creditialsNonExpired = true;
-//        boolean accountNonLocked = true;
-
-        //Poprzednia implementacja
-//        CustomUserDetails myUserPrincipal = new CustomUserDetails(user);
-
 
         org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
                 user.getEmail(),

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import pl.sda.wsumiedrogo.mappers.UserMapper;
 import pl.sda.wsumiedrogo.model.User;
-import pl.sda.wsumiedrogo.model.dto.UserDto;
 
 import javax.servlet.http.HttpServletResponse;
 

@@ -5,11 +5,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import pl.sda.wsumiedrogo.service.LoginService;
-import pl.sda.wsumiedrogo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -17,9 +14,7 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-
     private LoginService loginService;
-
 
     @Autowired
     public MainController(LoginService loginService) {
@@ -28,21 +23,20 @@ public class MainController {
 
     }
 
-
     @GetMapping("/")
-    public String home(@CookieValue(value = "username", defaultValue = "default") String username, Authentication authentication) {
+    public String home(Authentication authentication,Principal principal) {
 
         return "index";
     }
+
     @GetMapping("/store")
-    public String store(@CookieValue(value = "username", defaultValue = "default") String username) {
+    public String store() {
 
         return "store";
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model, Authentication authentication) {
-
+    public String login(Authentication authentication) {
 
             return "login";
 

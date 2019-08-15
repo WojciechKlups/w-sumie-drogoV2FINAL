@@ -2,7 +2,6 @@ package pl.sda.wsumiedrogo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SuccessPagesController {
@@ -10,10 +9,17 @@ public class SuccessPagesController {
     public String successpage() {
         return "successpages/successpage";
     }
+
     @GetMapping("/successlogout")
     public String successlogout() {
         return "successpages/successlogout";
     }
+
+    @GetMapping("/failedlogin")
+    public String failedlogin() {
+        return "successpages/failedlogin";
+    }
+
 //    @GetMapping("/successcheckout")
 //    public String successcheckout() {
 //        return "successpages/successcheckout";
