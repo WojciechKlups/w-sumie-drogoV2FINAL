@@ -21,21 +21,17 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    private String name;
-
-    private String code;
-
-    private double price;
-
+    private String model;
     private String brand;
-
+    private double price;
+    private String availability;
     private Category category;
 
     private boolean onStock;
 
-    private int weight;
-
-    private int quantity;
+    //TODO: trzeba by dorobić klasę detailsową produktów
+//    private int weight;
+//
+//    private int quantity;
 
 }

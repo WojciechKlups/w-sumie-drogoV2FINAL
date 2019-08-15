@@ -7,10 +7,6 @@ import pl.sda.wsumiedrogo.model.User;
 public class CheckoutService {
     public String checkout(User user)
     {
-        if (user.isLoggedIn()) {
             return "checkout-loggeduser";
-        } else {
-            return "checkout-unknownuser";
-        }
     }
 }

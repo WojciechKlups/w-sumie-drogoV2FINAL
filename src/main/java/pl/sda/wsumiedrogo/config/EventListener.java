@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import pl.sda.wsumiedrogo.model.Availability;
 import pl.sda.wsumiedrogo.model.Category;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.model.User;
@@ -23,14 +24,15 @@ public class EventListener {
     @org.springframework.context.event.EventListener(ApplicationReadyEvent.class)
     public void init(){
 
-        Product maczek = new Product();
-        maczek.setId(1L);
-        maczek.setName("maczek");
-        maczek.setCategory(Category.LAPTOPS);
-        maczek.setPrice(999.00);
-        maczek.setOnStock(true);
-        maczek.setWeight(3);
-        maczek.setQuantity(1);
+
+        Product product = new Product();
+
+        product.setPrice(999.00);
+        product.setBrand("Apple");
+        product.setModel("Macbook Pro");
+        product.setCategory(Category.LAPTOPS);
+        product.setOnStock(true);
+        product.setAvailability(Availability.AVAILABILITY_ONSTOCK.getRole());
 
         User user = new User();
 
