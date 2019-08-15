@@ -25,7 +25,7 @@ public class AccountService {
 
 
         model.addAttribute("user", userByEmail);
-        //TODO Zmiana na user DTO powoduje, że nie posiada on pola isActivated. Prawdopodobnie poprawa logowania powinna temu zaradzić
+
         if (userByEmail.isActivated()) {
             return "account";
         } else {

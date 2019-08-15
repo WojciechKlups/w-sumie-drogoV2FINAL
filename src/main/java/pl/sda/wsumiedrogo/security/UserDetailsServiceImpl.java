@@ -30,7 +30,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
        User user = userRepository.findByEmail(email).orElseThrow(ResourceNotFoundException::new);
 
-        CustomUserDetails customUserDetails = new CustomUserDetails(user);
+       //TODO: Jak to użyć ?
+//        CustomUserDetails customUserDetails = new CustomUserDetails(user);
 
         org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
                 user.getEmail(),

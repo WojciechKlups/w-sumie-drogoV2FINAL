@@ -11,8 +11,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder
-@Table(name = "user")
 public class User {
 
     @Id
@@ -23,8 +21,6 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
-    private String image = "../img/user.png";
-    private boolean isLoggedIn = false;
     @Column(unique = true)
     private Long phoneNumber;
     @Column(unique = true)
