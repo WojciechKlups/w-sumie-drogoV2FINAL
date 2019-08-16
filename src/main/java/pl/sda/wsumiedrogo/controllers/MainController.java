@@ -28,7 +28,7 @@ public class MainController {
         if (authentication == null) {
             return "login";
         } else {
-            return "account";
+            return "redirect:/account";
         }
     }
 }
