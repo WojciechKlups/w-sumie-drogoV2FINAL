@@ -12,7 +12,7 @@ public class MainController {
     //testing commits and pushes
 
     @GetMapping("/")
-    public String home(Authentication authentication,Principal principal) {
+    public String home(Authentication authentication, Principal principal) {
 
         return "index";
     }
@@ -25,7 +25,11 @@ public class MainController {
 
     @GetMapping("/login")
     public String login(Authentication authentication) {
+        if (authentication == null) {
             return "login";
+        } else {
+            return "account";
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package pl.sda.wsumiedrogo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,12 @@ public class AccountsController {
 
     }
 
-    @GetMapping("/account")
-    public String getUserByEmail(HttpServletResponse response, Model model,
-                                 @ModelAttribute User user, Principal principal) {
+    //HttpServletResponse response, Model model,
+    //                                 @ModelAttribute User user, Principal principal
 
-        //@RequestParam String email
-        return accountService.getAccount(model,principal.getName(),user,response);
+    //@RequestParam String email
+    @GetMapping("/account")
+    public String getUserByEmail(Model model, Authentication authentication) {
+        return accountService.getAccount(authentication, model);
     }
 }
