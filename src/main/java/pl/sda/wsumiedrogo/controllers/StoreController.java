@@ -27,6 +27,16 @@ public class StoreController {
         return "store";
     }
 
+    @GetMapping("/product")
+    public String getProduct() {
+        return "products/product";
+    }
+
+    @GetMapping("/addproduct")
+    public String getAddProduct() {
+        return "products/addproduct";
+    }
+
     @GetMapping("/maczek")
     public String getMaczek(HttpServletResponse response, Model model,
                             @ModelAttribute Product product, Principal principal) {
