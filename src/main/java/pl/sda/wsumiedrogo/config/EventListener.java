@@ -32,7 +32,7 @@ public class EventListener {
         product.setModel("Macbook Pro");
         product.setCategory(Category.LAPTOPS);
         product.setOnStock(true);
-        product.setAvailability(Availability.AVAILABILITY_ONSTOCK.getRole());
+       // product.setAvailability(Availability.AVAILABILITY_ONSTOCK.getRole());
 
         User user = new User();
         User userNowak = new User();
@@ -56,7 +56,7 @@ public class EventListener {
         userNowak.setLastName("Kowalski");
         userNowak.setPhoneNumber(123_456_789L);
         userNowak.setEmail("kowalski@gmail.com");
-        userNowak.setPassword(passwordEncoder.encode("1234"));
+        userNowak.setPassword(passwordEncoder.encode("4321"));
         userNowak.setActivated(true);
         userNowak.setRole("ADMIN");
 

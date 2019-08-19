@@ -1,24 +1,30 @@
 package pl.sda.wsumiedrogo.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.sda.wsumiedrogo.model.Product;
+import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.ProductRepository;
+import pl.sda.wsumiedrogo.service.ProductService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @Controller
-public class StoreController {
+public class ProductController {
 
     ProductRepository productRepository;
 
     @Autowired
-    public StoreController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -35,6 +41,12 @@ public class StoreController {
     @GetMapping("/addproduct")
     public String getAddProduct() {
         return "products/addproduct";
+    }
+
+    @PostMapping("/addproduct")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String postAddProduct(@ModelAttribute Product product, Model model){
+        return ProductService.addProduct(product, model);
     }
 
     @GetMapping("/maczek")

@@ -24,14 +24,15 @@ public class Product implements Serializable {
     private String model;
     private String brand;
     private double price;
-    private String availability;
     private Category category;
+    private int quantity;
+    private String description;
+    private byte[] image;
 
     private boolean onStock;
 
     //TODO: trzeba by dorobić klasę detailsową produktów
 //    private int weight;
 //
-//    private int quantity;
 
 }
