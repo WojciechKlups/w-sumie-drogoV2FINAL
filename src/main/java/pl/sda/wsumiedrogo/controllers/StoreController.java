@@ -1,5 +1,6 @@
 package pl.sda.wsumiedrogo.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ public class StoreController {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/stores")
+    @GetMapping("/store")
     public String getStore() {
         return "store";
     }
@@ -33,6 +34,6 @@ public class StoreController {
         //@RequestParam String email
        // return productRepository.findByModelAndBrand();
         //return accountService.getAccount(model,principal.getName(),user,response);
-        return "maczek";
+        return "products/maczek";
     }
 }

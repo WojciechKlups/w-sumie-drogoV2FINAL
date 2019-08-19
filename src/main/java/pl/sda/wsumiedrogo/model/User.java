@@ -28,6 +28,7 @@ public class User {
     private String password;
     private String activationCode;
     private boolean activated;
+    private String role;
 
     private String address;
     private String city;

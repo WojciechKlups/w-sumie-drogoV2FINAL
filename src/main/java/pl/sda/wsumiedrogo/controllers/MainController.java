@@ -14,13 +14,11 @@ public class MainController {
 
         return "index";
     }
+    @GetMapping("/product")
+    public String getProduct(Authentication authentication,Principal principal) {
 
-    @GetMapping("/store")
-    public String store() {
-
-        return "store";
+        return "products/product";
     }
-
     @GetMapping("/login")
     public String login(Authentication authentication) {
             return "login";
