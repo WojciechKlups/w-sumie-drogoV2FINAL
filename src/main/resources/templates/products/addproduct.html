@@ -58,12 +58,10 @@
                                 </div>
                                 <!--CATEGORY-->
                                 <div class="form-group">
-                                    <select class="form-control">
+                                    <select class="form-control" name="category">
                                         <option value="" disabled selected>Select your category</option>
-                                        <option value="LAPTOPS">Laptops</option>
-                                        <option value="SMARTPHONES">Smartphones</option>
-                                        <option value="CAMERAS">Cameras</option>
-                                        <option value="ACCESSORIES">Accessories</option>
+                                        <option th:each="categoryOpt : ${T(pl.sda.wsumiedrogo.model.Category).values()}"
+                                                th:value="${categoryOpt}" th:text="${categoryOpt.displayValue}"></option>
                                     </select>
                                 </div>
                                 <!--SIZE-->

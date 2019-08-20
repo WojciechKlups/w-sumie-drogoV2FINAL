@@ -18,4 +18,7 @@ public class ProductService {
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
+    public void getProduct(Product product) {
+        //productRepository.findByModelAndBrand();
+    }
 }

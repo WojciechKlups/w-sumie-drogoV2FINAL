@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.service.AddProductService;
 
@@ -23,7 +20,14 @@ public class AddProductController {
     }
 
     @GetMapping("/store")
-    public String getStore() {
+    public String getStore(Model model,
+                           @RequestParam(value = "name", defaultValue = "") String likeName,
+                           @RequestParam(value = "page", defaultValue = "1") int page) {
+        final int maxResult = 5;
+        final int maxNavigationPage = 10;
+//        PaginationResult<ProductInfo> result = productDAO.queryProducts(page,
+//                maxResult, maxNavigationPage, likeName);
+
         return "store";
     }
 
