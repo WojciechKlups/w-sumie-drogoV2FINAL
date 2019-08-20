@@ -6,5 +6,5 @@ import pl.sda.wsumiedrogo.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    Product findByModelAndBrand(String model,String brand);
+    Product findAllById(Long Id);
 }
