@@ -17,7 +17,7 @@
     <!-- /row -->
 </div>
 <!-- /container -->
-</div>
+
 <!-- /BREADCRUMB -->
 
 <div class="container">
@@ -31,7 +31,7 @@
                         </h2>
                         <div class="contactForm">
 
-                            <form th:action="@{/product}" th:object="${product}" method="post">
+                            <form th:action="@{/addproduct}" th:object="${product}" method="post">
                                 <!--UPLOAD IMAGE-->
                                 <div class="form-group">
                                     <input type="file" name="image" id="image" value="image" class="form-control">
@@ -51,14 +51,29 @@
                                     <input type="text" name="price" id="price" class="form-control" placeholder="Price"
                                            required="required">
                                 </div>
-                                <!--CATEGORY-->
-                                <div class="form-group">
-                                    <input type="text" name="category" id="category" class="form-control" placeholder="Category"
-                                           required="required">
-                                </div>
                                 <!--QUANTITY-->
                                 <div class="form-group">
                                     <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity"
+                                           required="required">
+                                </div>
+                                <!--CATEGORY-->
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option value="" disabled selected>Select your category</option>
+                                        <option value="LAPTOPS">Laptops</option>
+                                        <option value="SMARTPHONES">Smartphones</option>
+                                        <option value="CAMERAS">Cameras</option>
+                                        <option value="ACCESSORIES">Accessories</option>
+                                    </select>
+                                </div>
+                                <!--SIZE-->
+                                <div class="form-group">
+                                    <input type="text" name="size" id="size" class="form-control" placeholder="Size"
+                                           required="required">
+                                </div>
+                                <!--COLOR-->
+                                <div class="form-group">
+                                    <input type="text" name="color" id="color" class="form-control" placeholder="Color"
                                            required="required">
                                 </div>
                                 <!--DESCRIPTION-->

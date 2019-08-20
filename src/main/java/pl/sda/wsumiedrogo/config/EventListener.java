@@ -32,6 +32,13 @@ public class EventListener {
         product.setModel("Macbook Pro");
         product.setCategory(Category.LAPTOPS);
         product.setOnStock(true);
+        product.setDescription("Lorem ipsum dolor sit amet, " +
+                "consectetur adipisicing elit, sed do eiusmod tempor incididunt " +
+                "ut labore et dolore magna aliqua. " +
+                "Ut enim ad minim veniam, quis nostrud " +
+                "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+
+
        // product.setAvailability(Availability.AVAILABILITY_ONSTOCK.getRole());
 
         User user = new User();

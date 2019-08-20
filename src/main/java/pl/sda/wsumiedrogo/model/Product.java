@@ -28,6 +28,8 @@ public class Product implements Serializable {
     private int quantity;
     private String description;
     private byte[] image;
+    private String color;
+    private String size;
 
     private boolean onStock;
 

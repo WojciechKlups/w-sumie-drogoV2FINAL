@@ -75,13 +75,14 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">product name goes here</h2>
-							<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-								<li>
-									<a style="color:red;"
-									   th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
-								</li>
-							</th:block>
+							<h2 class="product-name">
+								<p th:text="${product.brand}"></p>
+								<p th:text="${product.model}"></p>
+							</h2>
+
+<!--							private int quantity;-->
+
+<!--							private byte[] image;-->
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -93,22 +94,22 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
+								<h3 class="product-price"><p th:text="${product.price}"></p> <del class="product-old-price">$990.00</del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p th:text="${product.description}"></p>
 
 							<div class="product-options">
 								<label>
 									Size
 									<select class="input-select">
-										<option value="0">X</option>
+										<option value="0"><p th:text="${product.size}"></p> </option>
 									</select>
 								</label>
 								<label>
 									Color
 									<select class="input-select">
-										<option value="0">Red</option>
+										<option value="0"><p th:text="${product.color}"></p> </option>
 									</select>
 								</label>
 							</div>
@@ -132,8 +133,8 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li><a href="#"><p th:text="${product.category}"></p></a></li>
+
 							</ul>
 
 							<ul class="product-links">
