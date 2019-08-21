@@ -19,17 +19,6 @@ public class AddProductController {
         this.addProductService = addProductService;
     }
 
-    @GetMapping("/store")
-    public String getStore(Model model,
-                           @RequestParam(value = "name", defaultValue = "") String likeName,
-                           @RequestParam(value = "page", defaultValue = "1") int page) {
-        final int maxResult = 5;
-        final int maxNavigationPage = 10;
-//        PaginationResult<ProductInfo> result = productDAO.queryProducts(page,
-//                maxResult, maxNavigationPage, likeName);
-
-        return "store";
-    }
 
     @GetMapping("/product")
     public String getProduct() {
