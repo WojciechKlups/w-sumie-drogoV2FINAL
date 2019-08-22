@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.repositories.ProductRepository;
-
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -23,7 +20,7 @@ public class ProductService {
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
-    public Page<Product> getAllProducts(String name){
-        return productRepository.findByName(name, PageRequest.of(0,5));
+    public Page<Product> getAllProducts(){
+        return productRepository.findAll(PageRequest.of(0,2));
     }
 }

@@ -222,8 +222,11 @@
 								<label>
 									Show:
 									<select class="input-select">
-										<option value="0">20</option>
-										<option value="1">50</option>
+										<option value="0">3</option>
+										<option value="1">6</option>
+										<option value="2">9</option>
+										<option value="3">12</option>
+										<option value="4">15</option>
 									</select>
 								</label>
 							</div>
@@ -235,51 +238,7 @@
 						<!-- /store top filter -->
 
 						<!-- store products -->
-						<div class="row">
-
-							<tbody th:each="product:${products}">
-								<!-- product -->
-								<div class="col-md-4 col-xs-6">
-									<div class="product">
-										<div class="product-img">
-											<img src="../img/product01.png" alt="">
-											<div class="product-label">
-												<span class="sale">-30%</span>
-												<span class="new">NEW</span>
-											</div>
-										</div>
-										<div class="product-body">
-											<p class="product-category"><p th:text="${product.category.displayValue}"></p></p>
-											<h3 class="product-name"><a href="#"><p th:text="${product.brand}"></p> <p th:text="${product.model}"></p></a></h3>
-											<h4 class="product-price"><p th:text="${product.price}"></p> <del class="product-old-price">$990.00</del></h4>
-											<div class="product-rating">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-											<div class="product-btns">
-												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-												<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-											</div>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-										</div>
-									</div>
-								</div>
-							</tbody>
-							<!-- /product -->
-
-
-<!--//TODO: Nie wiem co to trzeba sprawdzić jak n9ei zadziała-->
-<!--							<div class="clearfix visible-sm visible-xs"></div>-->
-
-
-
-						</div>
+						<div th:replace="fragments/productsinstore :: products"></div>
 						<!-- /store products -->
 
 						<!-- store bottom filter -->
