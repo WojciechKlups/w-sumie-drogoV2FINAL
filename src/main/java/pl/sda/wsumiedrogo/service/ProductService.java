@@ -9,7 +9,6 @@ import pl.sda.wsumiedrogo.repositories.ProductRepository;
 
 @Service
 public class ProductService {
-//https://www.youtube.com/watch?v=i0Cto2IWybo
     private ProductRepository productRepository;
 
     @Autowired
@@ -17,6 +16,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+
+    //https://www.baeldung.com/spring-thymeleaf-pagination
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
