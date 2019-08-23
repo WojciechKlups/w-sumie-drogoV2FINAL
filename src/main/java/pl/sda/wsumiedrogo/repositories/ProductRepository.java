@@ -8,5 +8,6 @@ import pl.sda.wsumiedrogo.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    Page<Product> findAll(Pageable pageable);
+
+    Page<Product> findByName(String name, Pageable pageable);
 }
