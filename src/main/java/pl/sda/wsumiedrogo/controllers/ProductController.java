@@ -12,6 +12,8 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
+    //https://o7planning.org/en/10683/create-a-shopping-cart-web-application-with-spring-boot-hibernate#a14223413
+
     private ProductService productService;
 
     @Autowired
@@ -20,12 +22,12 @@ public class ProductController {
     }
 
     @GetMapping("/store")
-    public String allProducts( @RequestParam Optional<String> name,
+    public String allProducts( @RequestParam Optional<String> brand,
                               @RequestParam Optional<Integer> page,
                               @RequestParam Optional<String> sortBy,
                               Model model){
 
-        model.addAttribute("products",productService.getAllProducts(name,page,sortBy));
+        model.addAttribute("products",productService.getAllProducts(brand,page,sortBy));
         return "store";
     }
 

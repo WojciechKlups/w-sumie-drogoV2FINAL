@@ -24,7 +24,7 @@ public class ProductService {
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
-    public Page<Product> getAllProducts(Optional<String> name,Optional<Integer> page, Optional<String> sortBy){
-        return productRepository.findByName(name.orElse("_"),PageRequest.of(page.orElse(0),9, Sort.Direction.ASC,sortBy.orElse("id")));
+    public Page<Product> getAllProducts(Optional<String> brand,Optional<Integer> page, Optional<String> sortBy){
+        return productRepository.findByBrand(brand.orElse("_"),PageRequest.of(page.orElse(0),9, Sort.Direction.ASC,sortBy.orElse("id")));
     }
 }

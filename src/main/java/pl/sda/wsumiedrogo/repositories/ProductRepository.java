@@ -3,11 +3,13 @@ package pl.sda.wsumiedrogo.repositories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.sda.wsumiedrogo.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    Page<Product> findByName(String name, Pageable pageable);
+    @Query("SELECT p FROM Product p WHERE brand LIKE %?1%")
+    Page<Product> findByBrand(String brand,Pageable pageable);
 }
