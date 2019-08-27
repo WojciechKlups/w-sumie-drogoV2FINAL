@@ -23,6 +23,10 @@ public class ProductService {
 
     //https://www.baeldung.com/spring-thymeleaf-pagination
 
+    public Optional<Product> findProduct(Long id){
+        return productRepository.findById(id);
+    }
+
     //TODO: Searching engine https://www.baeldung.com/hibernate-search
     public Page<Product> getAllProducts(Optional<String> brand,
                                         Optional<Integer> page,

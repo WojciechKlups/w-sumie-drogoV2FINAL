@@ -10,7 +10,7 @@ import pl.sda.wsumiedrogo.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    @Query("SELECT p FROM Product p WHERE brand LIKE %?1%")
+    @Query("SELECT p FROM Product p WHERE p.brand LIKE %?1%")
     Page<Product> findByBrand(String brand, Pageable pageable);
 }
 

@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.service.ProductService;
+import pl.sda.wsumiedrogo.service.ResourceNotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Controller
@@ -33,8 +35,16 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public String showProduct() {
+    public String showSpecificProduct(Model model, @RequestParam(value = "id", defaultValue = "") Long id,Product product) {
+
+        if (id != null) {
+            product = productService.findProduct(id).orElseThrow(ResourceNotFoundException::new);
+        }
+
+        model.addAttribute("product",product);
+
         return "products/product";
+
     }
 
     @GetMapping("/addproduct")
