@@ -24,7 +24,11 @@ public class ProductService {
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
-    public Page<Product> getAllProducts(Optional<String> brand,Optional<Integer> page, Optional<String> sortBy){
-        return productRepository.findByBrand(brand.orElse("_"),PageRequest.of(page.orElse(0),9, Sort.Direction.ASC,sortBy.orElse("id")));
+    //TODO: Searching engine https://www.baeldung.com/hibernate-search
+    public Page<Product> getAllProducts(Optional<String> brand,
+                                        Optional<Integer> page,
+                                        Optional<String> sortBy){
+        return productRepository.findByBrand(brand.orElse("_"),
+                PageRequest.of(page.orElse(0),9, Sort.Direction.ASC,sortBy.orElse("id")));
     }
 }
