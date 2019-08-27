@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.repositories.ProductRepository;
 
@@ -21,14 +22,18 @@ public class ProductService {
 
 
     //https://www.baeldung.com/spring-thymeleaf-pagination
-    public void addNewProduct(Product product) {
-        productRepository.save(product);
-    }
+
     //TODO: Searching engine https://www.baeldung.com/hibernate-search
     public Page<Product> getAllProducts(Optional<String> brand,
                                         Optional<Integer> page,
                                         Optional<String> sortBy){
         return productRepository.findByBrand(brand.orElse("_"),
                 PageRequest.of(page.orElse(0),9, Sort.Direction.ASC,sortBy.orElse("id")));
+    }
+
+    public String addProduct(Product product, Model model){
+        productRepository.save(product);
+        model.addAttribute("product", product);
+        return "successpages/successpage";
     }
 }

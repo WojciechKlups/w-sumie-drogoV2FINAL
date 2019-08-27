@@ -1,10 +1,11 @@
 package pl.sda.wsumiedrogo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.service.ProductService;
 
 import java.util.Optional;
@@ -29,6 +30,22 @@ public class ProductController {
 
         model.addAttribute("products",productService.getAllProducts(brand,page,sortBy));
         return "store";
+    }
+
+    @GetMapping("/product")
+    public String showProduct() {
+        return "products/product";
+    }
+
+    @GetMapping("/addproduct")
+    public String getAddProduct() {
+        return "products/addproduct";
+    }
+
+    @PostMapping("/addproduct")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String postAddProduct(@ModelAttribute Product product, Model model) {
+        return productService.addProduct(product, model);
     }
 
 }
