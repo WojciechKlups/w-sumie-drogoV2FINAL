@@ -32,27 +32,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/**","/login","/store","/register",
-                        "/checkout","/successpage","/account","/maczek","/product").permitAll();
+                .antMatchers("/").permitAll()
+                .antMatchers("/account").hasAnyRole("USER","ADMIN").anyRequest().authenticated();
 
         http.authorizeRequests()
-                .antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
-                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-
-        http.authorizeRequests()
-                .antMatchers("/admin/product")
-                .access("hasRole('ROLE_ADMIN')");
+                .antMatchers("/resources/**").permitAll().anyRequest().permitAll();
 
 //        http.authorizeRequests().and()
 //                .exceptionHandling()
 //                .accessDeniedPage("/403");
 
         http.authorizeRequests()
-                .and()
-                .formLogin()
-                .loginPage("/login")
+                .and().formLogin().loginPage("/login").permitAll()
                 .failureUrl("/failedlogin")
-                //.loginProcessingUrl("/account")
                 .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .logout()
