@@ -211,7 +211,7 @@ public class EventListener {
         user.setEmail("kowalski@gmail.com");
         user.setPassword(passwordEncoder.encode("1234"));
         user.setActivated(true);
-        user.setRole("ROLE_USER");
+        user.setRole("USER");
 
         user.setAddress("Polanka 63");
         user.setCity("Poznań");

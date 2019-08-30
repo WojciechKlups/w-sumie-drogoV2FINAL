@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll();
 
-//        http.authorizeRequests().and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/403");
+        http.authorizeRequests().and()
+                .exceptionHandling()
+                .accessDeniedPage("/403");
 
         http.authorizeRequests()
                 .and().formLogin().loginPage("/login").permitAll()
