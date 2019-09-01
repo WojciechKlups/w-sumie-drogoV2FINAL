@@ -20,6 +20,11 @@ public class SuccessPagesController {
         return "successpages/failedlogin";
     }
 
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "successpages/403";
+    }
+
 //    @GetMapping("/successcheckout")
 //    public String successcheckout() {
 //        return "successpages/successcheckout";

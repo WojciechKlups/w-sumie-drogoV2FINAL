@@ -1,18 +1,14 @@
 package pl.sda.wsumiedrogo.config;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import pl.sda.wsumiedrogo.model.Category;
 import pl.sda.wsumiedrogo.model.Product;
 import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.repositories.ProductRepository;
 import pl.sda.wsumiedrogo.repositories.UserRepository;
-
-import javax.jws.WebParam;
 
 @Configuration
 public class EventListener {
@@ -153,7 +149,7 @@ public class EventListener {
         Product santander = new Product();
 
         santander.setPrice(6599.00);
-        santander.setBrand("Santantder");
+        santander.setBrand("Santander");
         santander.setModel("Rzetelny Przyjazny Dla Ciebie Dla Rodziny");
         santander.setCategory(Category.LAPTOPS);
         santander.setOnStock(true);
