@@ -20,12 +20,15 @@ public class ProductController {
     }
 
     @GetMapping("/store")
-    public String allProducts( @RequestParam Optional<String> name,
+    public String allProducts(
+            //@RequestParam Optional<String> name,
                               @RequestParam Optional<Integer> page,
                               @RequestParam Optional<String> sortBy,
                               Model model){
 
-        model.addAttribute("products",productService.getAllProducts(name,page,sortBy));
+        model.addAttribute("products",productService.getAllProducts(
+                //name,
+                page,sortBy));
         return "store";
     }
 

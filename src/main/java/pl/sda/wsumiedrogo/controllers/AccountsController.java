@@ -9,7 +9,6 @@ import pl.sda.wsumiedrogo.model.User;
 import pl.sda.wsumiedrogo.service.AccountService;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
