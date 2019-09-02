@@ -47,6 +47,14 @@ Table OF Contents
 12 > RESPONSIVE
 ------------------------------------*/
 
+
+
+/*=========================================================
+	00 -> MYOWN
+===========================================================*/
+
+/* Po zalogowaniu jest lista */
+
 /*=========================================================
 	01 -> GENERAL
 ===========================================================*/
@@ -2146,7 +2154,7 @@ textarea.input {
   #top-header .header-links.pull-left {
     float: none !important;
   }
-  #top-header .header-links.pull-right {
+  #top-header .header-links.pull-down {
     float: none !important;
     margin-top: 5px;
   }
