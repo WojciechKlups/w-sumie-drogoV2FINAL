@@ -64,12 +64,12 @@
                             </span>
                             <span th:if="${#authentication.getName().split('@')[0] != 'anonymousUser'}">
 
-                                    <li><a href="#"><i class="fa fa-user-o"></i><p th:text="${#authentication.getName().split('@')[0]}"></p></a>
                                         <ul>
+                                            <li><a href="#"><i class="fa fa-user-o"></i><p th:text="${#authentication.getName().split('@')[0]}"></p></a></li>
                                             <li><a href="/account"><i class="fa fa-user-o"></i>My Account</a></li>
                                             <li><a href="/custom-logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                                         </ul>
-                                    </li>
+
 
 <!--                                    <li><a href="/account"><i class="fa fa-user-o"></i> <p th:text="${#authentication.getName().split('@')[0]}"></p></a>-->
 <!--                                    <li><a href="/account"><i class="fa fa-user-o"></i> My Account</a>-->
