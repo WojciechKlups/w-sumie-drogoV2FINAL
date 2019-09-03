@@ -45,30 +45,39 @@
         <div id="top-header">
             <div class="container">
                 <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-address-card" aria-hidden="true"></i> AUTHORS</a></li>
+                    <li style="font-size:16px"><a href="#" ><i class="fa fa-address-card" aria-hidden="true"></i> AUTHORS</a></li>
                 </ul>
                 <ul class="header-links pull-right">
 
-                    <!--                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-<!--                    <li><a href="#"><i class="fa fa-euro"></i> EURO</a></li>-->
-<!--                    <li><a href="#"><i class="fa fa-yen"></i> YEN</a></li>-->
-
-
-<!--                    https://www.youtube.com/watch?v=vd_GnTBzJ4U-->
-
-                    <td>
                             <span th:if="${#authentication.getName() == 'anonymousUser'}">
-                                    <li><a href="/login"><i class="fa fa-user-o"></i>Login</a>
-                                    <li><a href="/register"><i class="fa fa-align-justify"></i>Register</a></li>
+                                    <li><a style="font-size:14px" href="/login"><i class="fa fa-user-o"></i>Login</a>
+                                    <li><a style="font-size:14px" href="/register"><i class="fa fa-align-justify"></i>Register</a></li>
 
                             </span>
                             <span th:if="${#authentication.getName().split('@')[0] != 'anonymousUser'}">
 
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user-o"></i><p th:text="${#authentication.getName().split('@')[0]}"></p></a></li>
-                                            <li><a href="/account"><i class="fa fa-user-o"></i>My Account</a></li>
-                                            <li><a href="/custom-logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
-                                        </ul>
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                            <a style="font-size:14px" class="nav-link dropdown-toggle header-links pull-down" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fa fa-user-o"></i><span th:text="${#authentication.getName().split('@')[0]}"></span>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                              <a style="font-size:14px" class="dropdown-item" href="/account"><i class="fa fa-user-o"></i>My Account</a> <br>
+                                              <a style="font-size:14px" class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Settings</a> <br>
+                                              <a style="font-size:14px" class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Help</a> <br>
+                                              <a style="font-size:14px" class="dropdown-item" href="/custom-logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                                            </div>
+                                    </li>
+                                </ul>
+<!--                                        <ol>-->
+<!--                                            <li><a href="#"><i class="fa fa-user-o"></i><span  th:text="${#authentication.getName().split('@')[0]}"></span></a>-->
+<!--                                                <ul>-->
+<!--                                                    <li><a href="/account"><i class="fa fa-user-o"></i>My Account</a></li>-->
+<!--                                                    <li><a href="/custom-logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </li>-->
+
+<!--                                        </ol>-->
 
 
 <!--                                    <li><a href="/account"><i class="fa fa-user-o"></i> <p th:text="${#authentication.getName().split('@')[0]}"></p></a>-->
@@ -78,7 +87,7 @@
 <!--                                    <li><a href="/custom-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>-->
 
                             </span>
-                    </td>
+
 
 <!--STARA WERSJA                     -->
 <!--                    <li><a href="/account"><i class="fa fa-user-o"></i> My Account</a>-->
