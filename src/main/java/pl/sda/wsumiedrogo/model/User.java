@@ -1,7 +1,6 @@
 package pl.sda.wsumiedrogo.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +27,7 @@ public class User {
     private String password;
     private String activationCode;
     private boolean activated;
+    private String role;
 
     private String address;
     private String city;

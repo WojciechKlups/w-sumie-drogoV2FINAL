@@ -1,0 +1,120 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<!-- BREADCRUMB -->
+<!-- container -->
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Register</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /row -->
+</div>
+<!-- /container -->
+
+<!-- /BREADCRUMB -->
+
+<div class="container">
+    <div class="contenedor">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto  wow zoomIn">
+                    <div class="cta-inner text-center rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Add Product</span>
+                        </h2>
+                        <div class="contactForm">
+
+                            <form th:action="@{/addproduct}" th:object="${product}" method="post">
+                                <!--UPLOAD IMAGE-->
+                                <div class="form-group">
+                                    <input type="file" name="image" id="image" value="image" class="form-control">
+                                </div>
+                                <!--MODEL-->
+                                <div class="form-group">
+                                    <input type="text" name="model" id="model" class="form-control" placeholder="Model"
+                                           required="required">
+                                </div>
+                                <!--BRAND-->
+                                <div class="form-group">
+                                    <input type="text" name="brand" id="brand" class="form-control" placeholder="Brand"
+                                           required="required">
+                                </div>
+                                <!--PRICE-->
+                                <div class="form-group">
+                                    <input type="text" name="price" id="price" class="form-control" placeholder="Price"
+                                           required="required">
+                                </div>
+                                <!--QUANTITY-->
+                                <div class="form-group">
+                                    <input typ
+                                           e="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity"
+                                           required="required">
+                                </div>
+                                <!--CATEGORY-->
+                                <div class="form-group">
+                                    <select class="form-control" name="category">
+                                        <option value="" disabled selected>Select your category</option>
+                                        <option th:each="categoryOpt : ${T(pl.sda.wsumiedrogo.model.Category).values()}"
+                                                th:value="${categoryOpt}" th:text="${categoryOpt.displayValue}"></option>
+                                    </select>
+                                </div>
+                                <!--SIZE-->
+                                <div class="form-group">
+                                    <input type="text" name="size" id="size" class="form-control" placeholder="Size"
+                                           required="required">
+                                </div>
+                                <!--COLOR-->
+                                <div class="form-group">
+                                    <input type="text" name="color" id="color" class="form-control" placeholder="Color"
+                                           required="required">
+                                </div>
+                                <!--DESCRIPTION-->
+                                <div class="form-group">
+                                    <input type="text" name="description" id="description" class="form-control" placeholder="Description"
+                                           required="required">
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+
+                                        <input type="submit" name="submit" value="Add Product" class="btn-login">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- jQuery Plugins -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

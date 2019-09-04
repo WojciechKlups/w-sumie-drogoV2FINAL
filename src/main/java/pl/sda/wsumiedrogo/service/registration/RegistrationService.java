@@ -28,5 +28,4 @@ public class RegistrationService {
         model.addAttribute("user", user);
         return "successpages/successpage";
     }
-
 }
