@@ -27,6 +27,7 @@ public class ProductController {
 
     @GetMapping("/store")
     public String allProducts( @RequestParam Optional<String> brand,
+                               //@RequestParam Optional<Integer> page,
                                @RequestParam Optional<Integer> currentPage,
                                @RequestParam Optional<Integer> pageSize,
                                @RequestParam Optional<String> sortBy,
@@ -38,16 +39,17 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public String showSpecificProduct(Model model, @RequestParam(value = "id", defaultValue = "") Long id,Product product) {
+    public String showSpecificProduct(Model model, @RequestParam(value = "id", defaultValue = "") Long id) {
 
-        if (id != null) {
-            product = productService.findProduct(id).orElseThrow(ResourceNotFoundException::new);
-        }
-
-        model.addAttribute("product",product);
+        model.addAttribute("product",productService.findProduct(id).orElseThrow(ResourceNotFoundException::new));
 
         return "products/product";
 
+    }
+
+    @GetMapping("/addtocart")
+    public String addToCart() {
+        return "products/addproduct";
     }
 
     @GetMapping("/addproduct")
