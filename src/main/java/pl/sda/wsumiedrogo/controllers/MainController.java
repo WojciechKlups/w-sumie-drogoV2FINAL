@@ -17,19 +17,11 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/store")
-    public String store() {
-
-        return "store";
-    }
 
     @GetMapping("/login")
-    public String login(Authentication authentication) {
-        if (authentication == null) {
-            return "login";
-        } else {
-            return "redirect:/account";
-        }
+    public String login() {
+        return "login";
     }
+
 }
 
