@@ -20,7 +20,7 @@ public class AccountService {
         this.userService = userService;
     }
 
-    public String getAccount(Model model,String email) {
+    public String getAccount(Model model, String email, User user, HttpServletResponse response) {
         User userByEmail = userService.getUserByEmail(email);
 
 
