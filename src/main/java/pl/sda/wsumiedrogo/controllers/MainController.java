@@ -9,8 +9,10 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
+    //testing commits and pushes
+
     @GetMapping("/")
-    public String home(Authentication authentication,Principal principal) {
+    public String home(Authentication authentication, Principal principal) {
 
         return "index";
     }
@@ -18,7 +20,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String login() {
-            return "login";
+        return "login";
     }
 
 }
